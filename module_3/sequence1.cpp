@@ -3,12 +3,10 @@
  * @brief   Implementation for sequence class, for Assignment 3
  * 
  * Note: This implementation aggressively asserts the preconditions described
- * in its documentation. Because the test program does not validate these
- * preconditions before calling the class's methods, it will crash if the 
- * user attempts to advance beyond the elements of the array.
- * 
- * This strict adherence ensures that `current_index` never exceeds `used`, 
- * and simplifies the implementation of the insert and attach methods.
+ * in the sequence1.h documentation (i.e. "the current element is existent").
+ * Because the test program does not check that the preconditions are met 
+ * before calling the class's methods, it may crash more often than it 
+ * otherwise would. This ensures that the methods behave as expected.
  */
 #include "sequence1.h"
 #include <cassert>
