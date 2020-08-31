@@ -12,7 +12,8 @@
  */
 #include "sequence1.h"
 #include <cassert>
-                                      using namespace main_savitch_3;
+
+using namespace main_savitch_3;
 
 sequence::sequence() {
     used = 0;
@@ -29,27 +30,22 @@ void sequence::insert(const value_type &entry) {
     if (!is_item()) {
         current_index = 0;
     }
-    // shift elements including current_index right
-    for (int i = used; i > current_index; i--) {
+    for (int i = used++; i > current_index; i--) {
         data[i] = data[i - 1];
     }
     data[current_index] = entry;
-    used += 1;
 }
 void sequence::attach(const value_type &entry) {
     assert(size() < CAPACITY);
-    // attatch after current, or at end of array
     if (!is_item()) {
         current_index = used;
     } else {
         current_index += 1;
     }
-    // shift elements after current_index right
-    for (int i = used; i > current_index; i--) {
+    for (int i = used++; i > current_index; i--) {
         data[i] = data[i - 1];
     }
     data[current_index] = entry;
-    used += 1;
 }
 void sequence::remove_current() {
     assert (is_item());
