@@ -1,37 +1,43 @@
-/** ex_01.cpp
- * Prints personal information about me, in stunning 4-bit color!
- * If your terminal or OS do not support ANSI escape sequences this will probably print garbage.
+/**
+ * @file    ex_01.cpp
+ * @author  M Morella
+ * @brief   Prints personal information about me, in stunning 4-bit color!
  * 
- * Max Morella
- * Homework Assignment 1-2 (Lab Assignments)
- * Exercise 1
+ * Execute binary with -c flag to enable ANSI color in output. 
  */
 
 #include <iostream>
 #include <string>
 
-/* CONSTANTS FOR ANSI CODES */
+int main(int argc, char *argv[]) {
+    // check for -c flag, then enable or disable color constants.
+    std::string RSET, BGRN, BBLU, ACNT;
+    bool color_support = false;
+    for  (int i = 1; i < argc; i++) {
+        std::string arg = argv[i];
+        if (arg == "-c" || arg == "--color") {
+            color_support = true;
+        } else {
+            std::cout << "usage:\n"
+                      << "-c  --color  Enable color";
+            exit(1);
+        }
+        break;
+    }
+    if (color_support) {
+        RSET = "\x1b[0m";
+        // ANSI code to make text use bold green
+        BGRN = RSET + "\x1b[1;" + (std::to_string(32)) + "m";
+        // ANSI code to make text use blue
+        BBLU = RSET + "\x1b[1;" + (std::to_string(34)) + "m";
+        // ANSI code to make text use an accent color (33=yellow)
+        ACNT = RSET + "\x1b[" + (std::to_string(33)) + "m";
+    }
+    // prints an accented bullet point for items in a list
+    std::string ASTX = ACNT + " * " + RSET;
+    // print an accented arrow for separating strings
+    std::string ARRW = ACNT + " → " + RSET;
 
-// ANSI code to reset color
-const std::string RSET = "\e[0m";
-// ANSI code to make text use bold green
-const std::string BGRN = RSET + "\e[1;" + (std::to_string(32)) + "m";
-// ANSI code to make text use blue
-const std::string BBLU = RSET + "\e[1;" + (std::to_string(34)) + "m";
-// ANSI code to make text use an accent color (33=yellow)
-const std::string ACNT = RSET + "\e[" + (std::to_string(33)) + "m";
-
-/* CONSTANTS FOR TYPOGRAPHY */
-
-// prints an accented bullet point for items in a list
-const std::string ASTX = ACNT + " * " + RSET;
-// print an accented arrow for separating strings
-const std::string ARRW = ACNT + " → " + RSET;
-
-/* MAIN PROGRAM */
-
-int main()
-{
     std::cout << '\n'; // print an extra line of separation between the invoking command and the output
     std::cout << BGRN + "Name" + ARRW + "M Morella (She/They)" + '\n';
     std::cout << '\n';
