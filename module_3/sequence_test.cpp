@@ -1,5 +1,6 @@
-/** @file sequence_test.cpp
- * @brief An interactive test program for the new sequence class
+/**
+ * @file    sequence_test.cpp
+ * @brief   An interactive test program for the new sequence class
  */
 #include "sequence1.h" // With value_type defined as double
 #include <cctype>      // Provides toupper

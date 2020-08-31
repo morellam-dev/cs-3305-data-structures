@@ -1,5 +1,6 @@
-/** @file sequence1.h
- * @brief Class-provided declaration for `sequence` class.
+/** 
+ * @file    sequence1.h
+ * @brief   Class-provided declaration for `sequence` class.
  * 
  * Note: As a matter of personal preference, the monolithic documentation
  * provided in this header has been inlined into the implementation as 
