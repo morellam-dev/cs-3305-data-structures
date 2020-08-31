@@ -35,7 +35,7 @@ int main() {
     char choice;   // A command character entered by the user
 
     cout << "I have initialized an empty sequence of real numbers." << endl;
-
+    // modified method to ensure preconditions are met.
     do {
         print_menu();
         choice = toupper(get_user_command());
@@ -44,7 +44,10 @@ int main() {
             test.start();
             break;
         case '+':
-            test.advance();
+            if (test.is_item())
+                test.advance();
+            else
+                cout << "There is no current item. Could not advance." << endl;
             break;
         case '?':
             if (test.is_item())
@@ -65,14 +68,24 @@ int main() {
             cout << "Size is " << test.size() << '.' << endl;
             break;
         case 'I':
-            test.insert(get_number());
+            if (test.size() < test.CAPACITY)
+                test.insert(get_number());
+            else
+                cout << "Sequence is full. Could not insert." << endl;
             break;
         case 'A':
-            test.attach(get_number());
+            if (test.size() < test.CAPACITY)
+                test.attach(get_number());
+            else
+                cout << "Sequence is full. Could not attach." << endl;
             break;
         case 'R':
-            test.remove_current();
-            cout << "The current item has been removed." << endl;
+            if (test.is_item()) {
+                test.remove_current();
+                cout << "The current item has been removed." << endl;
+            } else {
+                cout << "There is no current item. Could not remove." << endl;
+            }
             break;
         case 'Q':
             cout << "Ridicule is the best test of truth." << endl;
@@ -84,6 +97,8 @@ int main() {
 
     return EXIT_SUCCESS;
 }
+
+// IMPLEMENTATIONS
 
 void print_menu() {
     // Library facilities used: iostream.h
