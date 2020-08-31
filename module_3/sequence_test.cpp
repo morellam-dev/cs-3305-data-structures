@@ -1,6 +1,9 @@
 /**
  * @file    sequence_test.cpp
  * @brief   An interactive test program for the new sequence class
+ * 
+ * Note: I have modified this program slightly, to add checks which ensure that
+ * the preconditions outlined in the `sequence.h` documentation are met.
  */
 #include "sequence1.h" // With value_type defined as double
 #include <cctype>      // Provides toupper
@@ -36,7 +39,6 @@ int main() {
     char choice;   // A command character entered by the user
 
     cout << "I have initialized an empty sequence of real numbers." << endl;
-    // modified method to ensure preconditions are met.
     do {
         print_menu();
         choice = toupper(get_user_command());
