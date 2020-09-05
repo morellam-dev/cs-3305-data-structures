@@ -1,0 +1,307 @@
+$ g++ sequence1.cpp sequence_test.cpp && ./a.out
+I have initialized an empty sequence of real numbers.
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: a
+Please enter a real number for the sequence: 3
+3 has been read.
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: i
+Please enter a real number for the sequence: 1
+1 has been read.
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: a
+Please enter a real number for the sequence: 2
+2 has been read.
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: p
+1
+2
+3
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: i
+Please enter a real number for the sequence: 4
+4 has been read.
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: p
+1
+4
+2
+3
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: r
+The current item has been removed.
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: c
+Current item is: 2
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: +
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: c
+Current item is: 3
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: a
+Please enter a real number for the sequence: 4
+4 has been read.
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: a
+Please enter a real number for the sequence: 5
+5 has been read.
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: p
+1
+2
+3
+4
+5
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: s
+Size is 5.
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: !
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: c
+Current item is: 1
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: i
+Please enter a real number for the sequence: 0
+0 has been read.
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: p
+0
+1
+2
+3
+4
+5
+
+The following choices are available:
+ !   Activate the start( ) function
+ +   Activate the advance( ) function
+ ?   Print the result from the is_item( ) function
+ C   Print the result from the current( ) function
+ P   Print a copy of the entire sequence
+ S   Print the result from the size( ) function
+ I   Insert a new number with the insert(...) function
+ A   Attach a new number with the attach(...) function
+ R   Activate the remove_current( ) function
+ Q   Quit this test program
+
+Enter choice: q
+Ridicule is the best test of truth.
+$ 
