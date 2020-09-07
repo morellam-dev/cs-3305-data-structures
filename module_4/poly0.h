@@ -46,7 +46,9 @@ class polynomial {
   // coefficients, except for coefficient c for the specified exponent.
   // When used as a default constructor (using default values for both
   // arguments), the result is a polynomial with all zero coefficients.
-  polynomial(double c = 0.0, unsigned int exponent = 0);
+  polynomial(double c = 0.0, unsigned int exponent = 0);  
+  // POSTCONDITION: This polynomial has been created as a deep copy of the given polynomial
+  polynomial(const polynomial &p2);
 
   // MODIFICATION MEMBER FUNCTIONS
 
@@ -59,6 +61,11 @@ class polynomial {
   void assign_coef(double coefficient, unsigned int exponent);
   // POSTCONDITION: All coefficients of this polynomial are set to zero.
   void clear();
+  // POSTCONDITION: This polynomial is a copy of the given polynomial
+  void operator=(const polynomial& p2);
+  // POSTCONDITION: the polynomial has been destructed and its allocated memory
+  // cleared.
+  ~polynomial();
 
   // CONSTANT MEMBER FUNCTIONS
 
@@ -86,12 +93,13 @@ class polynomial {
 
   // CONSTANT OPERATORS
 
-  // Same as the eval member function.
+  // POSTCONDITION: The return value is the value of this polynomial with
+  // the given value for the variable x.
   double operator()(double x) const { return eval(x); }
 
  private:
-  double coef[CAPACITY];
-  unsigned int current_degree;
+  double coef[CAPACITY]; // a fixed array
+  unsigned int current_degree; // the current 
 
   void compute_degree();
 };
@@ -112,7 +120,6 @@ polynomial operator-(const polynomial& p1, const polynomial& p2);
 // For example, if p1 is 2x^2 + 3x + 4 and p2 is 5x^2 - 1x + 7, then the
 // return value is 10x^4 + 13x^3 + 31x^2 + 17x + 28.
 polynomial operator*(const polynomial& p1, const polynomial& p2);
-
 // NON-MEMBER OUTPUT FUNCTIONS
 // POSTCONDITION: The polynomial has been printed to ostream out, which,
 // in turn, has been returned to the calling function.
