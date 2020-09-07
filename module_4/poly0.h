@@ -1,13 +1,9 @@
 // FILE: poly0.h
 // CLASS PROVIDED:
-//   class polynomial (in the namespace main_savitch_3)
-//     A polynomial has one variable x, real number coefficients, and
-//     non-negative integer exponents. Such a polynomial can be viewed
-//     as having the form:
-//       A[n]*x^n + A[n-1]*x^(n-1) + ... A[2]*x^2 + A[1]*x + A[0]
-//     where the A[n] are the real number coefficients and x^i represents
-//     the variable x raised to the i power. The coefficient A[0] is
-//     called the "constant" or "zeroth" term of the polynomial.
+// 
+// The polynomial class has been redesigned with with two extra methods: 
+// max_ex() and capacity(). These serve to replace the CAPACITY and MAX_EX
+// constants. 
 #ifndef POLY0_H
 #define POLY0_H
 #include <iostream>  // Provides ostream
@@ -32,7 +28,7 @@ class polynomial {
   // arguments), the result is a polynomial with all zero coefficients.
   polynomial(double c = 0.0, unsigned int exponent = 0, unsigned int max_ex = MAX_EX);
   // POSTCONDITION: This polynomial has been created as a deep copy of the given
-  // polynomial
+  // polynomial.
   polynomial(const polynomial& p2);
 
   // MODIFICATION MEMBER FUNCTIONS
@@ -46,7 +42,8 @@ class polynomial {
   void assign_coef(double coefficient, unsigned int exponent);
   // POSTCONDITION: All coefficients of this polynomial are set to zero.
   void clear();
-  // POSTCONDITION: This polynomial is a copy of the given polynomial
+  // POSTCONDITION: This polynomial is a deep copy of the given polynomial.
+  // If the given polynomial has a different capacity, it will 
   void operator=(const polynomial& p2);
   // POSTCONDITION: the polynomial has been destructed and its allocated memory
   // cleared.
@@ -87,7 +84,7 @@ class polynomial {
   double operator()(double x) const { return eval(x); }
 
  private:
-  double* coef;                 // a pointer to a dynamic array
+  double* m_coef;                 // a pointer to a dynamic array
   unsigned int m_capacity;        // the size of the dynamic array
   unsigned int current_degree;  // the current degree
   void compute_degree();        // calculates the degree and stores it in current_degree.
