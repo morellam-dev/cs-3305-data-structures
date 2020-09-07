@@ -8,7 +8,7 @@
 //     where the A[n] are the real number coefficients and x^i represents
 //     the variable x raised to the i power. The coefficient A[0] is
 //     called the "constant" or "zeroth" term of the polynomial.
-//   
+//
 // NOTES TO STUDENT:
 //   1. This version works by storing the coefficients in
 //      a fixed array. The coefficient for the x^k term is stored
@@ -59,7 +59,7 @@
 //     If all coefficients are zero, then the function returns zero.
 //
 //   polynomial derivative( ) const
-//     POSTCONDITION: The return value is the first derivative of this 
+//     POSTCONDITION: The return value is the first derivative of this
 //     polynomial.
 //
 //   double eval(double x) const
@@ -124,50 +124,47 @@
 
 // If your compiler does not support namespaces, then please delete the
 // following line and the set of brackets that follow.
-namespace main_savitch_3
-{
-    
-    class polynomial
-    {
-    public:
-	// CONSTANTS
-	static const unsigned int CAPACITY = 30;
-	static const unsigned int MAX_EX = CAPACITY - 1;
-	
-        // CONSTRUCTOR
-	polynomial(double c = 0.0, unsigned int exponent = 0);
+namespace main_savitch_3 {
 
-	// MODIFICATION MEMBER FUNCTIONS
-	void add_to_coef(double amount, unsigned int exponent);
-	void assign_coef(double coefficient, unsigned int exponent);
-	void clear( );
-	
-	// CONSTANT MEMBER FUNCTIONS
-	double coefficient(unsigned int exponent) const;
-	unsigned int degree( ) const { return current_degree; }
-	//polynomial derivative( ) const;
-	double eval(double x) const;
-	unsigned int next_term(unsigned int e) const;
-	unsigned int previous_term(unsigned int e) const;
-	
-	// CONSTANT OPERATORS
-	double operator( ) (double x) const { return eval(x); }
-	
-    private:
-	double coef[CAPACITY];
-	unsigned int current_degree;
+class polynomial {
+ public:
+  // CONSTANTS
+  static const unsigned int CAPACITY = 30;
+  static const unsigned int MAX_EX = CAPACITY - 1;
 
-		void compute_degree();
-    };
-    
-    // NON-MEMBER BINARY OPERATORS
-    polynomial operator +(const polynomial& p1, const polynomial& p2);
-    polynomial operator -(const polynomial& p1, const polynomial& p2);
-    //polynomial operator *(const polynomial& p1, const polynomial& p2);
-    
-    // NON-MEMBER OUTPUT FUNCTIONS
-    std::ostream& operator << (std::ostream& out, const polynomial& p);
+  // CONSTRUCTOR
+  polynomial(double c = 0.0, unsigned int exponent = 0);
 
+  // MODIFICATION MEMBER FUNCTIONS
+  void add_to_coef(double amount, unsigned int exponent);
+  void assign_coef(double coefficient, unsigned int exponent);
+  void clear();
 
-}
+  // CONSTANT MEMBER FUNCTIONS
+  double coefficient(unsigned int exponent) const;
+  unsigned int degree() const { return current_degree; }
+  // polynomial derivative( ) const;
+  double eval(double x) const;
+  unsigned int next_term(unsigned int e) const;
+  unsigned int previous_term(unsigned int e) const;
+
+  // CONSTANT OPERATORS
+  double operator()(double x) const { return eval(x); }
+
+ private:
+  double coef[CAPACITY];
+  unsigned int current_degree;
+
+  void compute_degree();
+};
+
+// NON-MEMBER BINARY OPERATORS
+polynomial operator+(const polynomial& p1, const polynomial& p2);
+polynomial operator-(const polynomial& p1, const polynomial& p2);
+// polynomial operator *(const polynomial& p1, const polynomial& p2);
+
+// NON-MEMBER OUTPUT FUNCTIONS
+std::ostream& operator<<(std::ostream& out, const polynomial& p);
+
+}  // namespace main_savitch_3
 #endif
