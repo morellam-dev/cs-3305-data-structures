@@ -46,9 +46,10 @@ class polynomial {
   // coefficients, except for coefficient c for the specified exponent.
   // When used as a default constructor (using default values for both
   // arguments), the result is a polynomial with all zero coefficients.
-  polynomial(double c = 0.0, unsigned int exponent = 0);  
-  // POSTCONDITION: This polynomial has been created as a deep copy of the given polynomial
-  polynomial(const polynomial &p2);
+  polynomial(double c = 0.0, unsigned int exponent = 0);
+  // POSTCONDITION: This polynomial has been created as a deep copy of the given
+  // polynomial
+  polynomial(const polynomial& p2);
 
   // MODIFICATION MEMBER FUNCTIONS
 
@@ -98,8 +99,8 @@ class polynomial {
   double operator()(double x) const { return eval(x); }
 
  private:
-  double coef[CAPACITY]; // a fixed array
-  unsigned int current_degree; // the current 
+  double coef[CAPACITY];        // a fixed array
+  unsigned int current_degree;  // the current degree
 
   void compute_degree();
 };
