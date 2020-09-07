@@ -1,49 +1,43 @@
-// FILE: poly0.h
-// CLASS PROVIDED:
-// 
-// The polynomial class has been redesigned with with two extra methods: 
-// max_ex() and capacity(). These serve to replace the CAPACITY and MAX_EX
-// constants. 
+// FILE:    poly0.h
+// AUTHOR:  M Morella
+// A header for the polynomial class.
+// Adds copy constructor, assignment operator, and destructor.
+// Uses a dynamic array which is automatically resized.
+// Probably not very memory efficient.
 #ifndef POLY0_H
 #define POLY0_H
 #include <iostream>  // Provides ostream
-
 // If your compiler does not support namespaces, then please delete the
 // following line and the set of brackets that follow.
 namespace main_savitch_3 {
-
 class polynomial {
  public:
-  // The default size of a polynomial's internal array.
-  // DEPRECATED. Use capacity() + 1 instead.
-  static const unsigned int CAPACITY = 30;
-  // The default maximum exponent of a polynomial by default.
-  // Deprecated. Use max_ex() instead.
+  // The maximum size of a polynomial's internal array.
+  static const size_t CAPACITY = 2048;
+  // The maximum exponent which can be safely stored.
   static const unsigned int MAX_EX = CAPACITY - 1;
-
-  // PRECONDITION: exponent <= max_ex
+  // PRECONDITION: exponent <= CAPACITY
   // POSTCONDITION: This polynomial has been create with all zero
   // coefficients, except for coefficient c for the specified exponent.
   // When used as a default constructor (using default values for both
   // arguments), the result is a polynomial with all zero coefficients.
-  polynomial(double c = 0.0, unsigned int exponent = 0, unsigned int max_ex = MAX_EX);
+  polynomial(double c = 0.0, unsigned int exponent = 0);
   // POSTCONDITION: This polynomial has been created as a deep copy of the given
   // polynomial.
   polynomial(const polynomial& p2);
 
   // MODIFICATION MEMBER FUNCTIONS
 
-  // PRECONDITION: exponent <= MAX_EX.
+  // PRECONDITION: exponent <= CAPACITY
   // POSTCONDITION: Adds the given amount to the coefficient of the specified
   // exponent.
   void add_to_coef(double amount, unsigned int exponent);
-  // PRECONDITION: exponent <= MAX_EX.
+  // PRECONDITION: exponent <= CAPACITY
   // POSTCONDITION: Sets the coefficient for the specified exponent.
   void assign_coef(double coefficient, unsigned int exponent);
   // POSTCONDITION: All coefficients of this polynomial are set to zero.
   void clear();
   // POSTCONDITION: This polynomial is a deep copy of the given polynomial.
-  // If the given polynomial has a different capacity, it will 
   void operator=(const polynomial& p2);
   // POSTCONDITION: the polynomial has been destructed and its allocated memory
   // cleared.
@@ -51,20 +45,13 @@ class polynomial {
 
   // CONSTANT MEMBER FUNCTIONS
 
-  // POSTCONDITION: returns the maximum permitted exponent by this polynomial.
-  inline
-  unsigned int max_ex() const { return m_capacity - 1; }
-  // POSTCONDITION: returns the capacity of this polynomial's array.
-  inline
-  unsigned int capacity() const { return m_capacity; }
   // POSTCONDITION: Returns coefficient at specified exponent of this
-  // polynomial. NOTE: for exponents > max_ex(), the return value is always zero.
+  // polynomial.
   double coefficient(unsigned int exponent) const;
   // POSTCONDITION: The function returns the value of the largest exponent
   // with a non-zero coefficient.
   // If all coefficients are zero, then the function returns zero.
-  inline
-  unsigned int degree() const { return current_degree; }
+  inline unsigned int degree() const { return current_degree; }
   // POSTCONDITION: The return value is the value of this polynomial with
   // the given value for the variable x.
   double eval(double x) const;
@@ -85,9 +72,13 @@ class polynomial {
 
  private:
   double* m_coef;                 // a pointer to a dynamic array
-  unsigned int m_capacity;        // the size of the dynamic array
-  unsigned int current_degree;  // the current degree
-  void compute_degree();        // calculates the degree and stores it in current_degree.
+  size_t m_capacity;              // the current size of the dynamic array
+  unsigned int current_degree;    // the current degree
+  // POSTCONDITION: current_degree stores the highest degree
+  void compute_degree();
+  // POSTCONDITION: capacity is now greater than or equal to minimum_size.
+  void reallocate(unsigned int minimum_size); 
+
 };
 
 // NON-MEMBER BINARY OPERATORS
