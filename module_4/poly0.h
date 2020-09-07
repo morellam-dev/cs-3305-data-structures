@@ -18,17 +18,19 @@ namespace main_savitch_3 {
 
 class polynomial {
  public:
-  // The size of the fixed array to store the coefficients.
+  // The default size of a polynomial's internal array.
+  // DEPRECATED. Use capacity() + 1 instead.
   static const unsigned int CAPACITY = 30;
-  // The maximum exponent permitted.
+  // The default maximum exponent of a polynomial by default.
+  // Deprecated. Use max_ex() instead.
   static const unsigned int MAX_EX = CAPACITY - 1;
 
-  // PRECONDITION: exponent <= MAX_EX.
+  // PRECONDITION: exponent <= max_ex
   // POSTCONDITION: This polynomial has been create with all zero
   // coefficients, except for coefficient c for the specified exponent.
   // When used as a default constructor (using default values for both
   // arguments), the result is a polynomial with all zero coefficients.
-  polynomial(double c = 0.0, unsigned int exponent = 0);
+  polynomial(double c = 0.0, unsigned int exponent = 0, unsigned int max_ex = MAX_EX);
   // POSTCONDITION: This polynomial has been created as a deep copy of the given
   // polynomial
   polynomial(const polynomial& p2);
@@ -52,16 +54,20 @@ class polynomial {
 
   // CONSTANT MEMBER FUNCTIONS
 
+  // POSTCONDITION: returns the maximum permitted exponent by this polynomial.
+  inline
+  unsigned int max_ex() const { return m_capacity - 1; }
+  // POSTCONDITION: returns the capacity of this polynomial's array.
+  inline
+  unsigned int capacity() const { return m_capacity; }
   // POSTCONDITION: Returns coefficient at specified exponent of this
-  // polynomial. NOTE: for exponents > MAX_EX, the return value is always zero.
+  // polynomial. NOTE: for exponents > max_ex(), the return value is always zero.
   double coefficient(unsigned int exponent) const;
   // POSTCONDITION: The function returns the value of the largest exponent
   // with a non-zero coefficient.
   // If all coefficients are zero, then the function returns zero.
+  inline
   unsigned int degree() const { return current_degree; }
-  // POSTCONDITION: The return value is the first derivative of this
-  // polynomial.
-  polynomial derivative() const;
   // POSTCONDITION: The return value is the value of this polynomial with
   // the given value for the variable x.
   double eval(double x) const;
@@ -82,7 +88,7 @@ class polynomial {
 
  private:
   double* coef;                 // a pointer to a dynamic array
-  size_t coef_size = CAPACITY;  // 
+  unsigned int m_capacity;        // the size of the dynamic array
   unsigned int current_degree;  // the current degree
   void compute_degree();        // calculates the degree and stores it in current_degree.
 };
@@ -97,18 +103,11 @@ polynomial operator+(const polynomial& p1, const polynomial& p2);
 // equal to the sum of the coefficients of p1 & p2 for any given
 // exponent.
 polynomial operator-(const polynomial& p1, const polynomial& p2);
-// PRECONDITION: p1.degree( ) + p2.degree( ) <= polynomial::MAX_EX.
-// POSTCONDITION: Each term of p1 has been multiplied by each term of p2,
-// and the answer is the sum of all these term-by-term products.
-// For example, if p1 is 2x^2 + 3x + 4 and p2 is 5x^2 - 1x + 7, then the
-// return value is 10x^4 + 13x^3 + 31x^2 + 17x + 28.
-polynomial operator*(const polynomial& p1, const polynomial& p2);
 
 // NON-MEMBER OUTPUT FUNCTIONS
 
 // POSTCONDITION: The polynomial has been printed to ostream out, which,
 // in turn, has been returned to the calling function.
 std::ostream& operator<<(std::ostream& out, const polynomial& p);
-
 }  // namespace main_savitch_3
 #endif
