@@ -13,8 +13,7 @@
 #include <cmath>     // Provides pow and max
 #include <iostream>  // Provides ostream
 
-using namespace main_savitch_3;
-
+namespace main_savitch_3 {
 polynomial::polynomial(double coefficient, unsigned int exponent) {
   assert(exponent <= CAPACITY);
   m_capacity = (exponent / 32 + 1) * 32;
@@ -116,8 +115,7 @@ void polynomial::compute_degree() {
     current_degree -= 1;
   }
 }
-polynomial main_savitch_3::operator+(const polynomial& p1,
-                                     const polynomial& p2) {
+polynomial operator+(const polynomial& p1, const polynomial& p2) {
   polynomial result;
   unsigned int degree = std::max(p1.degree(), p2.degree());
   for (unsigned int i = 0; i <= degree; i++) {
@@ -125,16 +123,14 @@ polynomial main_savitch_3::operator+(const polynomial& p1,
   }
   return result;
 }
-polynomial main_savitch_3::operator-(const polynomial& p1,
-                                     const polynomial& p2) {
+polynomial operator-(const polynomial& p1, const polynomial& p2) {
   polynomial result;
   for (unsigned int i = 0; i <= std::max(p1.degree(), p2.degree()); i++) {
     result.assign_coef(p1.coefficient(i) - p2.coefficient(i), i);
   }
   return result;
 }
-std::ostream& main_savitch_3::operator<<(std::ostream& out,
-                                         const polynomial& p) {
+std::ostream& operator<<(std::ostream& out, const polynomial& p) {
   for (int n = (int)p.degree(); n >= 0; n--) {
     if (p.coefficient(n) != 0 || p.degree() == 0) {
       if (n != (int)p.degree()) {
@@ -153,3 +149,4 @@ std::ostream& main_savitch_3::operator<<(std::ostream& out,
   }
   return out;
 }
+}  // namespace main_savitch_3

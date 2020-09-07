@@ -4,8 +4,8 @@
 // Adds copy constructor, assignment operator, and destructor.
 // Uses a dynamic array which is automatically resized.
 // Probably not very memory efficient.
-#ifndef POLY0_H
-#define POLY0_H
+#pragma once
+
 #include <iostream>  // Provides ostream
 // If your compiler does not support namespaces, then please delete the
 // following line and the set of brackets that follow.
@@ -71,14 +71,13 @@ class polynomial {
   double operator()(double x) const { return eval(x); }
 
  private:
-  double* m_coef;                 // a pointer to a dynamic array
-  size_t m_capacity;              // the current size of the dynamic array
-  unsigned int current_degree;    // the current degree
+  double* m_coef;               // a pointer to a dynamic array
+  size_t m_capacity;            // the current size of the dynamic array
+  unsigned int current_degree;  // the current degree
   // POSTCONDITION: current_degree stores the highest degree
   void compute_degree();
   // POSTCONDITION: capacity is now greater than or equal to minimum_size.
-  void reallocate(unsigned int minimum_size); 
-
+  void reallocate(unsigned int minimum_size);
 };
 
 // NON-MEMBER BINARY OPERATORS
@@ -98,4 +97,3 @@ polynomial operator-(const polynomial& p1, const polynomial& p2);
 // in turn, has been returned to the calling function.
 std::ostream& operator<<(std::ostream& out, const polynomial& p);
 }  // namespace main_savitch_3
-#endif
