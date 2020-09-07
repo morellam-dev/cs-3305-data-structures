@@ -8,24 +8,6 @@
 //     where the A[n] are the real number coefficients and x^i represents
 //     the variable x raised to the i power. The coefficient A[0] is
 //     called the "constant" or "zeroth" term of the polynomial.
-//
-//
-// NON-MEMBER OUTPUT FUNCTIONS for the polynomial Class
-//   ostream& operator << (ostream& out, const polynomial& p)
-// PRECONDITION: filename is a legal filename for a gif file.
-// Also (low_x < high_x) && (low_y < high_y).
-// POSTCONDITION: A gif file has been written to the specified filename
-// with a graphical representation of the polynomial in the specified
-// ranges (low_x...high_x and low_y...high_y).
-//   void make_gif(
-//     const polynomial& p,
-//     const char filename[ ],
-//     double low_x,
-//     double high_x,
-//     double low_y,
-//     double high_y
-//     )
-
 #ifndef POLY0_H
 #define POLY0_H
 #include <iostream>  // Provides ostream
@@ -99,10 +81,10 @@ class polynomial {
   double operator()(double x) const { return eval(x); }
 
  private:
-  double coef[CAPACITY];        // a fixed array
+  double* coef;                 // a pointer to a dynamic array
+  size_t coef_size = CAPACITY;  // 
   unsigned int current_degree;  // the current degree
-
-  void compute_degree();
+  void compute_degree();        // calculates the degree and stores it in current_degree.
 };
 
 // NON-MEMBER BINARY OPERATORS
@@ -121,7 +103,9 @@ polynomial operator-(const polynomial& p1, const polynomial& p2);
 // For example, if p1 is 2x^2 + 3x + 4 and p2 is 5x^2 - 1x + 7, then the
 // return value is 10x^4 + 13x^3 + 31x^2 + 17x + 28.
 polynomial operator*(const polynomial& p1, const polynomial& p2);
+
 // NON-MEMBER OUTPUT FUNCTIONS
+
 // POSTCONDITION: The polynomial has been printed to ostream out, which,
 // in turn, has been returned to the calling function.
 std::ostream& operator<<(std::ostream& out, const polynomial& p);
