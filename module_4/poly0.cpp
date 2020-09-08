@@ -1,11 +1,14 @@
 // FILE:    poly0.cpp
 // AUTHOR:  M Morella
 //
-// Implementation of the polynomial class, using an dynamically sized array
+// Implementation of the polynomial class, using an dynamically sized array.
 // The array of coefficients is automatically resized, so it can theoretically
 // store theoretically arbitrarily large coefficients. In practice, values
-// beyond several million requires allocating absurd amounts of memory, so this
-// is not recommended.
+// beyond several thousand requires allocating absurd amounts of memory
+// (8 bytes per coefficient), so it is limited by the CAPACITY constant in
+// the header.
+// Storing the largest exponent (x^2047) theoretically allocates 16 KiB of
+// memory.
 #include "poly0.h"
 
 #include <cassert>   // Provides assert
@@ -14,6 +17,8 @@
 #include <iostream>  // Provides ostream
 
 namespace main_savitch_3 {
+// polynomial member method implementations
+
 polynomial::polynomial(double coefficient, unsigned int exponent) {
   assert(exponent <= CAPACITY);
   m_capacity = (exponent / 32 + 1) * 32;
@@ -52,6 +57,13 @@ void polynomial::reallocate(unsigned int minimum_size) {
   delete[] m_coef;
   m_coef = new_array;
 }
+polynomial::~polynomial() { delete m_coef; }
+double polynomial::coefficient(unsigned int exponent) const {
+  if (degree() < exponent) {
+    return 0;
+  }
+  return m_coef[exponent];
+}
 void polynomial::assign_coef(double c, unsigned int exponent) {
   assert(exponent <= MAX_EX);
   if (exponent >= m_capacity) {
@@ -74,13 +86,6 @@ void polynomial::clear() {
     m_coef[i] = 0;
   }
   current_degree = 0;
-}
-polynomial::~polynomial() { delete m_coef; }
-double polynomial::coefficient(unsigned int exponent) const {
-  if (degree() < exponent) {
-    return 0;
-  }
-  return m_coef[exponent];
 }
 double polynomial::eval(double x) const {
   double result = 0;
