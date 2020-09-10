@@ -15,7 +15,7 @@ class polynomial {
   // The maximum exponent which can be safely stored.
   static const unsigned int MAX_EX = CAPACITY - 1;
   // Constructs a new polynomial. If specified, the given exponent will have the
-  // given exponent.
+  // given coefficient.
   // PRECONDITION: exponent <= CAPACITY
   polynomial(double c = 0.0, unsigned int exponent = 0);
   // Constructs a deep copy of another polynomial
