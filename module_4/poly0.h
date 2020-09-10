@@ -17,7 +17,7 @@ class polynomial {
   // Constructs a new polynomial. If specified, the given exponent will have the
   // given coefficient.
   // PRECONDITION: exponent <= CAPACITY
-  polynomial(double c = 0.0, unsigned int exponent = 0);
+  polynomial(double coefficient = 0.0, unsigned int exponent = 0);
   // Constructs a deep copy of another polynomial
   polynomial(const polynomial& p2);
 
