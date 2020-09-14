@@ -28,13 +28,62 @@ Get familiar with the methods in the linked lists toolkit
   - The function should print an end of line after the list data is printed.
 
 - **Carry out the following steps** in the program, that is, in the function `main`:
-  - Create a list header and insert the following data in order: $23.5, 45.6, 67.7,
-       89.8, 12$
+  - Create a list header and insert the following data in order:
+    - $23.5, 45.6, 67.7, 89.8, 12.0$
   - Print out the list using the function you wrote
   - Call the function `check_list1` with the list as argument. This
              will print a single message if successful. Otherwise the program will
              terminate.
   - Create a list with two pointers, one to the head and one to the tail.
+
+    - Insert 23.5 into the list.
+    - Then insert these elements in order at the tail of the list:
+      - $45.6, 67.7, 123.5, 89.8, 12.0$
+    - Print the list
+    - Call the function `check_list2` with the list as argument
+  - Declare head and tail pointers for another list
+    - Use those pointers to make a copy of the first list you created
+    - Print the list
+    - Call the function `check_list1` with the list as argument.
+    - Print out the data at the tail of the list, it should be $23.5$.
+  - Remove the first item in the second list created above
+    - Print the list
+    - Call the function `check_list2B` with the list as argument
+  - Continue with the same list and remove the third item in the list
+    - Print the list
+    - Call the function `check_list2C` with the list as argument.
+
+- Here is the output from **one version of the exercise**. This uses a fancier version of the print list function (The result of Task 1 should be similar to this. The order of numbers for each test in below is the answer.)
+
+```text
+{12.9, 89.8, 67.7, 45.6, 23.5}
+check_list1 done
+{23.5, 45.6, 67.7, -123.5, 89.8, 12.9}
+check_list2 done
+at location 4 in list2 -123.
+{12.9, 89.8, 67.7, 45.6, 23.5}
+check_list
+done at tail3:
+23.
+{45.6, 67.7, -123.5, 89.8, 12.9}
+check_list2B done
+{45.6, 67.7, 89.8, 12.9}
+check_list2C done
+```
+
+## Task 2
+
+Do **programming projects 2 and 7 on page 287 of textbook**. Put the required functions in
+the **new created "main.cpp"** using the class **node1**. (You don’t need to modify node1. Just
+use it)
+
+- Writing functions for each project 2 and 7. (remove duplicates, rearrangement)
+- Writing a ‘main’ function to test your functions. It is not necessary to make it to interact
+    test.
+- You can use the print_list() function from Task 1 to print your linked list.
+
+Hint: use a scenario such as ‘create new list’, ‘input numbers to your linked list.’, ‘show the
+list’, ‘remove duplicates’, ‘show the list’, ‘rearrange the list’, ‘show the list’.
 
 ## Submitting Assignment
 
