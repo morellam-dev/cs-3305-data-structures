@@ -29,16 +29,16 @@ Get familiar with the methods in the linked lists toolkit
 
 - **Carry out the following steps** in the program, that is, in the function `main`:
   - Create a list header and insert the following data in order:
-    - $23.5, 45.6, 67.7, 89.8, 12.0$
+    - $23.5, 45.6, 67.7, 89.8, 12.9$
   - Print out the list using the function you wrote
   - Call the function `check_list1` with the list as argument. This
              will print a single message if successful. Otherwise the program will
              terminate.
   - Create a list with two pointers, one to the head and one to the tail.
 
-    - Insert 23.5 into the list.
+    - Insert $23.5$ into the list.
     - Then insert these elements in order at the tail of the list:
-      - $45.6, 67.7, 123.5, 89.8, 12.0$
+      - $45.6, 67.7, -123.5, 89.8, 12.9$
     - Print the list
     - Call the function `check_list2` with the list as argument
   - Declare head and tail pointers for another list
@@ -62,9 +62,8 @@ check_list1 done
 check_list2 done
 at location 4 in list2 -123.
 {12.9, 89.8, 67.7, 45.6, 23.5}
-check_list
-done at tail3:
-23.
+check_list1 done
+at tail3: 23.
 {45.6, 67.7, -123.5, 89.8, 12.9}
 check_list2B done
 {45.6, 67.7, 89.8, 12.9}
@@ -73,14 +72,42 @@ check_list2C done
 
 ## Task 2
 
-Do **programming projects 2 and 7 on page 287 of textbook**. Put the required functions in
-the **new created "main.cpp"** using the class **node1**. (You don’t need to modify node1. Just
-use it)
+Do **programming projects 2 and 7 on page 287 of textbook**. Put the required functions in the **new created "main.cpp"** using the class `node1`. (You don’t need to modify node1. Just use it)
+
+> **Project 2:** Write a function that takes a linked list of items and deletes all repetitions from the list. In your implementation, assume that items can be compared for equality using ==.
+>
+> **Project 7:** Write a function that takes a linked list of integers and rearranges the nodes so that the integers stored are sorted into the order smallest to largest, with the smallest integer in the node at the head of the list. If the original list had any integers occurring more than once, then the changed list will have the same number of each integer. For concreteness you will use lists of integers, but your function should still work if you replace the integer type with any other type for which the less-than operation is part of a total order semantics. Use the following function prototype and specification:
+>
+  ```cpp
+    void sort_list(node*& head_ptr);
+    // Precondition: head_ptr is a head pointer of
+    // a linked list of items, and these items can be
+    // compared with a less-than operator.
+    // Postcondition: head_ptr points to the head
+    // of a linked list with exactly the same entries
+    // (including repetitions if any), but the entries
+    // in this list are sorted from smallest to
+    // largest. The original linked list is no longer
+    // available.
+  ```
+>
+> Your procedure will implement the following algorithm (which is often called selection sort): The algorithm removes nodes one at a time from the original list and adds the nodes to a second list until all the nodes have been moved to the second list. The second list will then be sorted.
+>
+  ```c
+  // Pseudocode for selection sort
+  while (the first list still has some nodes) {
+      1. Find the node with the largest item of all the nodes in the first list.
+      2. Remove this node from the first list.
+      3. Insert this node at the head of the second list.
+  }
+  ```
+>
+> After all the nodes are moved to the second list, the pointer, head_ptr, can be moved to point to the head of the second list. Note that your function will move entire nodes, not just items, to the second list. Thus, the first list will get shorter and shorter until it is an empty list. Your function should not need to call the new operator since it is just moving nodes from one list to another (not creating new nodes).
 
 - Writing functions for each project 2 and 7. (remove duplicates, rearrangement)
-- Writing a ‘main’ function to test your functions. It is not necessary to make it to interact
+- Writing a `main` function to test your functions. It is not necessary to make it to interact
     test.
-- You can use the print_list() function from Task 1 to print your linked list.
+- You can use the `print_list()` function from Task 1 to print your linked list.
 
 Hint: use a scenario such as ‘create new list’, ‘input numbers to your linked list.’, ‘show the
 list’, ‘remove duplicates’, ‘show the list’, ‘rearrange the list’, ‘show the list’.
