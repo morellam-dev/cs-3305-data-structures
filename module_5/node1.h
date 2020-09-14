@@ -20,8 +20,7 @@
 //   bad_alloc: the constructor, list_head_insert, list_insert, list_copy,
 //   list_piece.
 
-#ifndef MAIN_SAVITCH_NODE1_H
-#define MAIN_SAVITCH_NODE1_H
+#pragma once
 
 #include <cstdlib>  // Provides size_t and NULL
 
@@ -139,5 +138,3 @@ void list_clear(node *&head_ptr);
 // source_ptr. The original list is unaltered.
 void list_copy(const node *source_ptr, node *&head_ptr, node *&tail_ptr);
 }  // namespace main_savitch_5
-
-#endif
