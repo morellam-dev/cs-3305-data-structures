@@ -14,6 +14,4 @@ void check_list2(nodep lst);
 void check_list2B(nodep lst);
 void check_list2C(nodep lst);
 
-
-
-#endif //CLASS_150921_CHECK_LISTS_H
+#endif  // CLASS_150921_CHECK_LISTS_H
