@@ -4,9 +4,16 @@
 
 M Morella
 
-### `task1_main.cpp`
+### Screenshots
+
+![screenshot of task 1 & 2 output](https://i.imgur.com/ZTQNHh3.png)
+
+### Task 1
 
 ```cpp
+// FILE:    task1_main.cpp
+// AUTHOR:  M Morella
+
 #include <iostream>
 
 #include "check_lists.h"
@@ -108,9 +115,12 @@ check_list2B done
 check_list2C done
 ```
 
-### `task2_main.cpp`
+### Task 2
 
 ```cpp
+// FILE:    task1_main.cpp
+// AUTHOR:  M Morella
+
 #include <iostream>
 
 #include "node1.h"
@@ -209,11 +219,13 @@ void list_remove_duplicates(node *&head_ptr) {
 
 // Helper function for selective sort method
 // Searches the given linked list for the largest value, which
-// Finds the node with the largest value, unlinks it, and returns a pointer to that node.
+// Finds the node with the largest value, unlinks it, and returns a pointer to
+// that node.
 node *list_yank_largest(node *&head_ptr) {
   node *prev = new node(-1, head_ptr);
   node::value_type biggest_value = prev->link()->data();
-  for (node *cursor = head_ptr; cursor != NULL && cursor->link() != NULL; cursor = cursor->link()) {
+  for (node *cursor = head_ptr; cursor != NULL && cursor->link() != NULL;
+       cursor = cursor->link()) {
     node::value_type value = cursor->link()->data();
     if (value > biggest_value) {
       prev = cursor;
@@ -230,9 +242,10 @@ node *list_yank_largest(node *&head_ptr) {
 }
 
 void sort_list(node *&head_ptr) {
-  node *new_head_ptr = NULL;      // create a second list
+  node *new_head_ptr = NULL;  // create a second list
   while (head_ptr != NULL) {  // while the first list still has some elements...
-    node *largest = list_yank_largest(head_ptr); // find the largest item, and unlink it.
+    node *largest =
+        list_yank_largest(head_ptr);  // find the largest item, and unlink it.
     largest->set_link(new_head_ptr);
     new_head_ptr = largest;
   }
@@ -255,7 +268,3 @@ list2: {12.9, 12.9, 89.8, -123.5, 67.7, 45.6, 89.8, 67.7, 23.5}
 after sorting list2: {-123.5, 12.9, 12.9, 23.5, 45.6, 67.7, 67.7, 89.8, 89.8}
 after remove duplicates: {-123.5, 12.9, 23.5, 45.6, 67.7, 89.8}
 ```
-
-### Screenshots
-
-![screenshot of task 1 & 2 output](https://i.imgur.com/ZTQNHh3.png)
