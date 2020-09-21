@@ -8,11 +8,20 @@ This repository contains solutions to school-assigned homework and lab assignmen
 
 ## Execution
 
-These programs were written to be compiled individually within an interactive terminal. While most of them are simple enough to be cross-compatible, they have only been tested in version 10 of the GNU compiler, using the GNU++17 dialect.
+These programs were originally written to be compiled individually through an interactive terminal, specifically using g++-10. However, for convenience, I have created an extremely naive makefile which compiles every module into a separate executable in the `out` directory.
 
 ```sh
-module_1> gcc --version
-gcc-10 (Homebrew GCC 10.2.0) 10.2.0
+bash$ make
+# ... make output ...
+bash$ ls out/
+# ... list of executables ...
+bash$ ./out/1_2_pyramid
+8 6 4 2 0
+6 4 2 0
+4 2 0
+2 0
+0
 
-module_1> g++ -std=gnu++17 **.cpp && ./a.out
+$ make clean
+rm -r ./out/
 ```
