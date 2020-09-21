@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "node1.h"
+#include "check_lists.h"
 
 using namespace main_savitch_5;
 
@@ -27,45 +28,94 @@ void list_remove_duplicates(node *&head_ptr);
 void sort_list(node *&head_ptr);
 
 int main(int argc, char const *argv[]) {
-  // task 2 tests
-  std::cout << "\n=== TASK 2 DEMOS ===\n\n";
+  // TASK 1 CODE
+  std::cout << "\n=== TASK 1 OUTPUTS ===\n\n";
+  // LIST 1
+  node *list1 = new node(23.5);
+  list_head_insert(list1, 45.6);
+  list_head_insert(list1, 67.7);
+  list_head_insert(list1, 89.8);
+  list_head_insert(list1, 12.9);
+  list_print(list1);
+  check_list1(list1);
+
+  // LIST 2
   node *list2 = new node(23.5);
-  list_head_insert(list2, 67.7);
-  list_head_insert(list2, 89.8);
-  list_head_insert(list2, 45.6);
-  list_head_insert(list2, 67.7);
-  list_head_insert(list2, -123.5);
-  list_head_insert(list2, 89.8);
-  list_head_insert(list2, 12.9);
-  list_head_insert(list2, 12.9);
-  node *list1 = new node(1.0);
-  list_head_insert(list1, 2.0);
-  list_head_insert(list1, 1.0);
-  list_head_insert(list1, 2.0);
-  list_head_insert(list1, 1.0);
-  list_head_insert(list1, 5.0);
-  list_head_insert(list1, 2.0);
-  list_head_insert(list1, 3.0);
-  list_head_insert(list1, 4.0);
-  list_head_insert(list1, 2.0);
-  list_head_insert(list1, 4.0);
-  std::cout << "list1: ";
-  list_print(list1);
-  std::cout << "after remove duplicates: ";
-  list_remove_duplicates(list1);
-  list_print(list1);
-  std::cout << "after sorting: ";
-  sort_list(list1);
-  list_print(list1);
-  std::cout << "\n";
+  node *tail2 = list2;
+  list_insert(tail2, 45.6);
+  tail2 = tail2->link();
+  list_insert(tail2, 67.7);
+  tail2 = tail2->link();
+  list_insert(tail2, -123.5);
+  tail2 = tail2->link();
+  list_insert(tail2, 89.8);
+  tail2 = tail2->link();
+  list_insert(tail2, 12.9);
+  tail2 = tail2->link();
   std::cout << "list2: ";
   list_print(list2);
-  std::cout << "after sorting list2: ";
-  sort_list(list2);
+  check_list2(list2);
+  std::cout << "at location 4 in list2: " << list_locate(list2, 4)->data()
+            << "\n";
+  // above instruction is not given, but present in the sample output
+
+  // LIST 3
+  node *list3;
+  node *tail3;
+  list_copy(list1, list3, tail3);
+  std::cout << "list3: ";
+  list_print(list3);
+  check_list1(list3);
+  std::cout << "at tail3: " << tail3->data() << "\n";
+
+  // BACK TO LIST 2 ?:s
+  list_head_remove(list2);
   list_print(list2);
+  check_list2B(list2);
+  list_remove(list_locate(list2, 2));
+  // instructions say to remove 3rd item,
+  // but -123.5 is actually 2nd item at this point
+  list_print(list2);
+  check_list2C(list2);
+  // task 2 tests
+  std::cout << "\n=== TASK 2 DEMOS ===\n\n";
+  node *list4 = new node(23.5);
+  list_head_insert(list4, 67.7);
+  list_head_insert(list4, 89.8);
+  list_head_insert(list4, 45.6);
+  list_head_insert(list4, 67.7);
+  list_head_insert(list4, -123.5);
+  list_head_insert(list4, 89.8);
+  list_head_insert(list4, 12.9);
+  list_head_insert(list4, 12.9);
+  node *list5 = new node(1.0);
+  list_head_insert(list5, 2.0);
+  list_head_insert(list5, 1.0);
+  list_head_insert(list5, 2.0);
+  list_head_insert(list5, 1.0);
+  list_head_insert(list5, 5.0);
+  list_head_insert(list5, 2.0);
+  list_head_insert(list5, 3.0);
+  list_head_insert(list5, 4.0);
+  list_head_insert(list5, 2.0);
+  list_head_insert(list5, 4.0);
+  std::cout << "list5: ";
+  list_print(list5);
   std::cout << "after remove duplicates: ";
-  list_remove_duplicates(list2);
-  list_print(list2);
+  list_remove_duplicates(list5);
+  list_print(list5);
+  std::cout << "after sorting: ";
+  sort_list(list5);
+  list_print(list5);
+  std::cout << "\n";
+  std::cout << "list4: ";
+  list_print(list4);
+  std::cout << "after sorting list4: ";
+  sort_list(list4);
+  list_print(list4);
+  std::cout << "after remove duplicates: ";
+  list_remove_duplicates(list4);
+  list_print(list4);
   return 0;
 }
 
