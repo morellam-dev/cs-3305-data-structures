@@ -8,20 +8,37 @@ This repository contains solutions to school-assigned homework and lab assignmen
 
 ## Execution
 
-These programs were originally written to be compiled individually through an interactive terminal, specifically using g++-10. However, for convenience, I have created an extremely naive makefile which compiles every module into a separate executable in the `out` directory.
+Run `make` to build the makefile in each project directory. By default, all binaries will use the `.out` extension, which is ignored by this repository, and easy to erase.
+
+Modules which only generate one binary will generate a `main.out`. Otherwise, they will be named descriptively.
 
 ```sh
-bash$ make
-# ... make output ...
-bash$ ls out/
-# ... list of executables ...
-bash$ ./out/1_2_pyramid
-8 6 4 2 0
-6 4 2 0
-4 2 0
-2 0
-0
+cs-3305/module_1$ make CXX="g++-10"
+# g++ -Wall -o about_me.out ex_01.cpp
+# g++ -Wall -o pyramid.out ex_02.cpp
+cs-3305/module_1$ ls *.out
+# about_me.out  pyramid.out
+cs-3305/module_1$ ./pyramid.out
+# 8 6 4 2 0
+# 6 4 2 0
+# 4 2 0
+# 2 0
+# 0
+$ rm **.out
+# clean up all .out files.
+```
 
-$ make clean
-rm -r ./out/
+### macOS Compilation Note
+
+Xcode Developer Tools ship with `clang++` installed as `g++`. Installing the GNU compiler collection through Homebrew installs version 10 of g++ as `/usr/local/bin/g++-10` to avoid conflicts.
+
+In future versions, you may need to call g++-11 or later.
+
+```sh
+$ brew install gcc
+# installs g++-10 and gcc-10 to /usr/local/bin/
+$ /usr/bin/g++ --version
+# Apple clang version 12.0.0 (clang-1200.0.32.2)
+$ /usr/local/bin/g++-10 --version
+# g++-10 (Homebrew GCC 10.2.0) 10.2.0
 ```
