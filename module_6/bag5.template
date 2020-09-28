@@ -8,23 +8,21 @@
 //   3. The total number of items in the list is stored in the member variable
 //       many_nodes.
 
-#include <cassert>  // Provides assert
-#include <cstdlib>  // Provides NULL, rand
+#include <cassert>   // Provides assert
+#include <cstdlib>   // Provides NULL, rand
+#include <iostream>  // provides cout
 
+#include "bag5.h"
 #include "node2.h"  // Provides node
 
 template <class Item>
-bag<Item>::bag()
-// Library facilities used: cstdlib
-{
+bag<Item>::bag() {
   head_ptr = NULL;
   many_nodes = 0;
 }
 
 template <class Item>
-bag<Item>::bag(const bag<Item>& source)
-// Library facilities used: node2.h
-{
+bag<Item>::bag(const bag<Item>& source) {
   node<Item>* tail_ptr;  // Needed for argument of list_copy
 
   list_copy(source.head_ptr, head_ptr, tail_ptr);
@@ -32,17 +30,13 @@ bag<Item>::bag(const bag<Item>& source)
 }
 
 template <class Item>
-bag<Item>::~bag()
-// Library facilities used: node2.h
-{
+bag<Item>::~bag() {
   list_clear(head_ptr);
   many_nodes = 0;
 }
 
 template <class Item>
-typename bag<Item>::size_type bag<Item>::count(const Item& target) const
-// Library facilities used: cstdlib, node2.h
-{
+typename bag<Item>::size_type bag<Item>::count(const Item& target) const {
   size_type answer;
   const node<Item>* cursor;
 
@@ -60,9 +54,7 @@ typename bag<Item>::size_type bag<Item>::count(const Item& target) const
 }
 
 template <class Item>
-typename bag<Item>::size_type bag<Item>::erase(const Item& target)
-// Library facilities used: cstdlib, node2.h
-{
+typename bag<Item>::size_type bag<Item>::erase(const Item& target) {
   size_type answer = 0;
   node<Item>* target_ptr;
 
@@ -82,9 +74,7 @@ typename bag<Item>::size_type bag<Item>::erase(const Item& target)
 }
 
 template <class Item>
-bool bag<Item>::erase_one(const Item& target)
-// Library facilities used: cstdlib, node2.h
-{
+bool bag<Item>::erase_one(const Item& target) {
   node<Item>* target_ptr;
 
   target_ptr = list_search(head_ptr, target);
@@ -97,9 +87,7 @@ bool bag<Item>::erase_one(const Item& target)
 }
 
 template <class Item>
-Item bag<Item>::grab() const
-// Library facilities used: cassert, cstdlib, node2.h
-{
+Item bag<Item>::grab() const {
   size_type i;
   const node<Item>* cursor;
 
@@ -110,17 +98,13 @@ Item bag<Item>::grab() const
 }
 
 template <class Item>
-void bag<Item>::insert(const Item& entry)
-// Library facilities used: node2.h
-{
+void bag<Item>::insert(const Item& entry) {
   list_head_insert(head_ptr, entry);
   ++many_nodes;
 }
 
 template <class Item>
-void bag<Item>::operator+=(const bag<Item>& addend)
-// Library facilities used: node2.h
-{
+void bag<Item>::operator+=(const bag<Item>& addend) {
   node<Item>* copy_head_ptr;
   node<Item>* copy_tail_ptr;
 
@@ -133,9 +117,7 @@ void bag<Item>::operator+=(const bag<Item>& addend)
 }
 
 template <class Item>
-void bag<Item>::operator=(const bag<Item>& source)
-// Library facilities used: node2.h
-{
+void bag<Item>::operator=(const bag<Item>& source) {
   node<Item>* tail_ptr;  // Needed for argument to list_copy
 
   if (this == &source) return;
@@ -155,3 +137,32 @@ bag<Item> operator+(const bag<Item>& b1, const bag<Item>& b2) {
   answer += b2;
   return answer;
 }
+
+// --- IMPLEMENTATIONS ADDED BY STUDENT ---
+
+template <class Item>
+void bag<Item>::print_value_range(const Item& x, const Item& y) {
+  bool found_x = false;
+  for (iterator it = begin(); it != end() && *it != y; it++) {
+    if (found_x || *it == x) {
+      found_x = true;
+      std::cout << *it << ' ';
+    }
+  }
+  if (found_x) {
+    std::cout << '\n';  // only print newline if some output occured.
+  }
+}
+
+template <class Item>
+void bag<Item>::remove_repetitions() {
+  for (node<Item>* p = head_ptr; p != NULL; p = p->link()) {
+    Item p_data = p->data();
+    for (node<Item>* j = p; j != NULL; j = j->link()) {
+      while (j->link() != NULL && j->link()->data() == p_data) {
+        list_remove(j);
+      }
+    }
+  }
+}
+// --- END STUDENT IMPLEMENTATIONS ---
