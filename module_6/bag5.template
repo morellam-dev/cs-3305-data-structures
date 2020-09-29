@@ -143,14 +143,18 @@ bag<Item> operator+(const bag<Item>& b1, const bag<Item>& b2) {
 template <class Item>
 void bag<Item>::print_value_range(const Item& x, const Item& y) {
   bool found_x = false;
-  for (iterator it = begin(); it != end() && *it != y; it++) {
-    if (found_x || *it == x) {
+  for (iterator it = begin(); it != end(); it++) {
+    if (!found_x && *it == x) {
       found_x = true;
+    } else if (*it == y) {
+      break; // if x and y are the same, don't break on first instance of y.
+    }
+    if (found_x) {
       std::cout << *it << ' ';
     }
   }
   if (found_x) {
-    std::cout << '\n';  // only print newline if some output occured.
+    std::cout << std::endl;  // only print newline if some output occured.
   }
 }
 
