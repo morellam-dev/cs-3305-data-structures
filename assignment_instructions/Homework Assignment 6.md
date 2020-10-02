@@ -2,7 +2,7 @@
 
 Instructor: Seokjun Lee
 
-## Homework Assignment 5
+## Homework Assignment 6
 
 The purpose of this lab is to reinforce linked-list version of the bag template class with an iterator in C++. You need to use **BagTemplatewithIterator** project posted on the course website.
 
