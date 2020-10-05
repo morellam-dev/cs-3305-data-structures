@@ -3,7 +3,20 @@
 // Based on node2.h, written by M. Main & W. Savitch.
 //
 // Template class for nodes in *doubly linked* lists.
+// Class was renamed to node3.h to signify that this implementation introduces
+// the following breaking changes:
 //
+// * `link()` is deprecated in favor of `next()` and `prev()`
+// * `set_link()` is deprecated in favor of `set_next()` and `set_prev()`
+// * The constructor `node(entry, link)` is replaced by `node(prev_link, entry,
+// next_link)`.
+//   * For instantiating an unlinked node, `node()` and `node(entry)` are
+//   supported.
+//   * Otherwise, all parameters must be explicitly declared: `node(NULL,
+//   Item(), NULL)`
+//
+// Also includes new methods list_tail_insert, list_tail_remove, to simplify
+// deque implementation.
 
 #pragma once
 
@@ -30,6 +43,8 @@ class node {
   // @returns a reference the stored Item of this node.
   Item& data() { return data_field; }
   // @returns a node pointer to the next linked node.
+  node* link() { return next_field; }
+  // @returns a node pointer to the next linked node.
   node* next() { return next_field; }
   // @returns a node pointer to the previously linked node.
   node* prev() { return prev_field; }
@@ -39,6 +54,8 @@ class node {
   // @returns a reference to the stored Item of this node.
   const Item& data() const { return data_field; }
   // @returns a node pointer to the next linked node.
+  const node* link() const { return next_field; }
+  // @returns a node pointer to the next linked node.
   const node* next() const { return next_field; }
   // @returns a node pointer to the previously linked node.
   const node* prev() const { return prev_field; }
@@ -47,6 +64,8 @@ class node {
 
   // Postcondition: This node now stores the given Item.
   void set_data(const Item& new_data) { data_field = new_data; }
+  // Postcondition: The node now links to the specified next node.
+  void set_link(node* new_next) { next_field = new_next; }
   // Postcondition: The node now links to the specified next node.
   void set_next(node* new_next) { next_field = new_next; }
   // Postcondition: The node now links to the specified prevous node.
