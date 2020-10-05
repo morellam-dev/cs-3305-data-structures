@@ -20,11 +20,12 @@ deque<T>::deque(const deque<T>& dq) {
 }
 
 template <class T>
-void deque<T>::operator=(const deque<T>& dq) {
+deque<T>& deque<T>::operator=(const deque<T>& dq) {
   list_clear(first);
   node<T>* source_ptr = dq.first;
   count = list_length(source_ptr);
   list_copy(source_ptr, first, last);
+  return *this;
 }
 
 template <class T>

@@ -24,7 +24,7 @@ class deque {
   deque(const deque<T>& dq);
 
   // postcondition: current deque is a copy of dq
-  void operator=(const deque<T>& dq);
+  deque<T>& operator=(const deque<T>& dq);
 
   // precondition: deque is not empty
   // postcondition: reference to element at front of deque
