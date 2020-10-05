@@ -1,49 +1,122 @@
 using namespace main_savitch_6B;
 
 template <class T>
-deque<T>::deque() {}
+deque<T>::deque() {
+  first = NULL;
+  last = NULL;
+  count = 0;
+}
 
 template <class T>
-deque<T>::~deque() {}
+deque<T>::~deque() {
+  list_clear(first);
+}
 
 template <class T>
-deque<T>::deque(const deque<T>& dq) {}
+deque<T>::deque(const deque<T>& dq) {
+  node<T>* source_ptr = dq.first;
+  count = list_length(source_ptr);
+  list_copy(source_ptr, first, last);
+}
 
 template <class T>
-deque<T>& deque<T>::operator=(const deque<T>& dq) {}
+void deque<T>::operator=(const deque<T>& dq) {
+  list_clear(first);
+  node<T>* source_ptr = dq.first;
+  count = list_length(source_ptr);
+  list_copy(source_ptr, first, last);
+}
 
 template <class T>
-T& deque<T>::front() {}
+T& deque<T>::front() {
+  return first->data();
+}
 
 template <class T>
-T deque<T>::front() const {}
+T deque<T>::front() const {
+  return first->data();
+}
 
 template <class T>
-T& deque<T>::back() {}
+T& deque<T>::back() {
+  return last->data();
+}
 
 template <class T>
-T deque<T>::back() const {}
+T deque<T>::back() const {
+  return last->data();
+}
 
 template <class T>
-void deque<T>::push_front(const T& entry) {}
+void deque<T>::push_front(const T& entry) {
+  list_head_insert(first, entry);
+  if (last == NULL) {
+    last = first;
+  }
+  count++;
+}
 
 template <class T>
-void deque<T>::push_back(const T& entry) {}
+void deque<T>::push_back(const T& entry) {
+  list_tail_insert(last, entry);
+  if (first == NULL) {
+    first = last;
+  }
+  count++;
+}
 
 template <class T>
-void deque<T>::pop_front() {}
+void deque<T>::pop_front() {
+  list_head_remove(first);
+  count--;
+}
 
 template <class T>
-void deque<T>::pop_back() {}
+void deque<T>::pop_back() {
+  list_tail_remove(last);
+  count--;
+}
 
 template <class T>
-deque<T>::size_type deque<T>::size() const {}
+typename deque<T>::size_type deque<T>::size() const {
+  return count;
+}
 
 template <class T>
-bool deque<T>::empty() const {}
+bool deque<T>::empty() const {
+  return count == 0;
+}
 
 template <class U>
-bool operator==(const deque<U>& dq1, const deque<U>& dq2) {}
+bool operator==(const deque<U>& dq1, const deque<U>& dq2) {
+  const_node_iterator<U> it1(dq1.first);
+  const_node_iterator<U> it2(dq2.first);
+  const_node_iterator<U> end;
+  while (it1 != end || it2 != end) {
+    if (*it1 != *it2) {
+      return false;
+    }
+    it1++;
+    it2++;
+  }
+  return true;
+}
+
+// For convenience. Simply returns the opposite of operator==.
+// Not a friend function, so not declared in header.
+template <class U>
+bool operator!=(const deque<U>& dq1, const deque<U>& dq2) {
+  return !(dq1 == dq2);
+}
 
 template <class U>
-std::ostream& operator<<(std::ostream& out, const deque<U>& dq) {}
+std::ostream& operator<<(std::ostream& out, const deque<U>& dq) {
+  out << "{ ";
+  const_node_iterator<U> end;
+
+  for (const_node_iterator<U> it(dq.first); it != end; it++) {
+    out << *it << ' ';
+  }
+  out << '}';
+  return out;
+}
