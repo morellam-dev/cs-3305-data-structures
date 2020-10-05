@@ -16,14 +16,16 @@ class node {
  public:
   // TYPEDEF for the node<Item> template class:
   typedef Item value_type;
-  // Postcondition: The node now contains the specified new next.
-  // NOTE: The default value for the init_data is obtained from the default
-  // constructor of the Item.
-  node(const Item& init_data = Item(), node* init_next = NULL,
-       node* init_prev = NULL) {
+
+  // Postcondition: The node is initialized with null references, and the given
+  // Item. If no value is given, the default Item constructor is used.
+  node(const Item& init_data = Item()) { data_field = init_data; }
+  // Postcondition: The node is initialized with the given value, and linked to
+  // the given nodes.
+  node(node* init_prev, const Item& init_data, node* init_next) {
+    prev_field = init_prev;
     data_field = init_data;
     next_field = init_next;
-    prev_field = init_prev;
   }
   // @returns a reference the stored Item of this node.
   Item& data() { return data_field; }

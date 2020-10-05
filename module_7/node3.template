@@ -38,7 +38,7 @@ void list_copy(const node<Item>* source_ptr, node<Item>*& head_ptr,
 template <class Item>
 void list_head_insert(node<Item>*& head_ptr, const Item& entry) {
   node<Item>* old_head = head_ptr;
-  node<Item>* new_node = new node<Item>(entry, old_head, NULL);
+  node<Item>* new_node = new node<Item>(NULL, entry, old_head);
   if (old_head != NULL) {
     old_head->set_prev(new_node);
   }
@@ -57,7 +57,7 @@ void list_head_remove(node<Item>*& head_ptr) {
 
 template <class Item>
 void list_tail_insert(node<Item>*& tail_ptr, const Item& entry) {
-  node<Item>* new_node = new node<Item>(entry, NULL, tail_ptr);
+  node<Item>* new_node = new node<Item>(tail_ptr, entry, NULL);
   if (tail_ptr != NULL) {
     tail_ptr->set_next(new_node);
   }
@@ -77,14 +77,14 @@ void list_tail_remove(node<Item>*& tail_ptr) {
 template <class Item>
 void list_insert(node<Item>* previous_ptr, const Item& entry) {
   node<Item>* insert_ptr;
-  insert_ptr = new node<Item>(entry, previous_ptr->next(), previous_ptr);
+  insert_ptr = new node<Item>(previous_ptr, entry, previous_ptr->next());
   previous_ptr->set_next(insert_ptr);
 }
 
 template <class Item>
 void list_attach(node<Item>* next_ptr, const Item& entry) {
   node<Item>* insert_ptr;
-  insert_ptr = new node<Item>(entry, next_ptr, next_ptr->prev());
+  insert_ptr = new node<Item>(next_ptr->prev(), entry, next_ptr);
   next_ptr->set_prev(insert_ptr);
 }
 
