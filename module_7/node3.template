@@ -1,13 +1,8 @@
-// FILE: node2.template
-// IMPLEMENTS: The functions of the node template class and the
-// linked list toolkit (see node2.h for documentation).
-//
-// NOTE:
-//   Since node is a template class, this file is included in node2.h.
-//   Therefore, we should not put any using directives in this file.
-//
-// INVARIANT for the node class:
-//   The data of a node is stored in data_field, and the next in next_field.
+// FILE: node3.template
+// AUTHOR:  M Morella
+// Based on node2.h, written by M. Main & W. Savitch
+
+// Implementation for doubly-linked node class.
 
 #include <cassert>  // Provides assert
 #include <cstdlib>  // Provides NULL and size_t
