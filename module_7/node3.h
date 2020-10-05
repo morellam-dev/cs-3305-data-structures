@@ -1,12 +1,10 @@
-// node3.h (part of the namespace main_savitch_6B)
-// AUTHOR: M Morella, based on code provided by M. Main & W. Savitch.
-// PROVIDES: A template class for a node in a doubly linked list, helper
-// functions for manipulating linked lists, and a bidirectional node iterator.
-// The node_iterator is a forward iterators with two constructors: (1) A
-// constructor (with a node<Item>* parameter) that attaches the iterator to the
-// specified node in a linked list, and (2) a default constructor that creates a
-// special iterator that marks the position that is beyond the end of a linked
-// list. There is also a const_node_iterator for use with const node<Item>*.
+// FILE:    node3.h
+// AUTHOR:  M Morella
+// Based on node2.h, written by M. Main & W. Savitch.
+//
+// Template class for nodes in *doubly linked* lists.
+//
+
 #pragma once
 
 #include <cstdlib>   // Provides NULL and size_t
@@ -50,7 +48,7 @@ class node {
   // Postcondition: The node now links to the specified next node.
   void set_next(node* new_next) { next_field = new_next; }
   // Postcondition: The node now links to the specified prevous node.
-  void set_prev(node* new_prev) { next_field = new_prev; }
+  void set_prev(node* new_prev) { prev_field = new_prev; }
 
  private:
   Item data_field;   // the stored Item
