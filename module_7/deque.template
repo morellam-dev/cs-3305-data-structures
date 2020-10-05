@@ -1,3 +1,5 @@
+// FILE: deque.template
+// Implementation for deque.h header
 using namespace main_savitch_6B;
 
 template <class T>
