@@ -1,8 +1,8 @@
 // FILE:    main_morella.cpp
 // AUTHOR:  M Morella
 
-#include <iostream> // provides cout
-#include <string>   // provides string
+#include <iostream>  // provides cout
+#include <string>    // provides string
 
 #include "bag5.h"
 #include "node2.h"

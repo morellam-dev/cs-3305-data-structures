@@ -14,7 +14,8 @@
 //     how many items are in a sequence.
 //
 //   static const size_type CAPACITY = _____
-//     sequence::CAPACITY is the maximum number of items that a sequence can hold.
+//     sequence::CAPACITY is the maximum number of items that a sequence can
+//     hold.
 //
 // CONSTRUCTOR for the sequence class:
 //   sequence( )
@@ -34,21 +35,21 @@
 //   void insert(const value_type& entry)
 //     Precondition: size( ) < CAPACITY.
 //     Postcondition: A new copy of entry has been inserted in the sequence
-//     before the current item. If there was no current item, then the new entry 
+//     before the current item. If there was no current item, then the new entry
 //     has been inserted at the front of the sequence. In either case, the newly
 //     inserted item is now the current item of the sequence.
 //
 //   void attach(const value_type& entry)
 //     Precondition: size( ) < CAPACITY.
-//     Postcondition: A new copy of entry has been inserted in the sequence after
-//     the current item. If there was no current item, then the new entry has 
-//     been attached to the end of the sequence. In either case, the newly
+//     Postcondition: A new copy of entry has been inserted in the sequence
+//     after the current item. If there was no current item, then the new entry
+//     has been attached to the end of the sequence. In either case, the newly
 //     inserted item is now the current item of the sequence.
 //
 //   void remove_current( )
 //     Precondition: is_item returns true.
-//     Postcondition: The current item has been removed from the sequence, and the
-//     item after this (if there is one) is now the new current item.
+//     Postcondition: The current item has been removed from the sequence, and
+//     the item after this (if there is one) is now the new current item.
 //
 // CONSTANT MEMBER FUNCTIONS for the sequence class:
 //   size_type size( ) const
@@ -71,33 +72,31 @@
 #define MAIN_SAVITCH_SEQUENCE_H
 #include <cstdlib>  // Provides size_t
 
-namespace main_savitch_3
-{
-    class sequence
-    {
-    public:
-        // TYPEDEFS and MEMBER CONSTANTS
-        typedef double value_type;
-        typedef std::size_t size_type;
-        static const size_type CAPACITY = 30;
-        // CONSTRUCTOR
-        sequence( );
-        // MODIFICATION MEMBER FUNCTIONS
-        void start( );
-        void advance( );
-        void insert(const value_type& entry);
-        void attach(const value_type& entry);
-        void remove_current( );
-        // CONSTANT MEMBER FUNCTIONS
-        size_type size( ) const;
-        bool is_item( ) const;
-        value_type current( ) const;
-    private:
-        value_type data[CAPACITY];
-        size_type used;
-        size_type current_index;
-    };
-}
+namespace main_savitch_3 {
+class sequence {
+ public:
+  // TYPEDEFS and MEMBER CONSTANTS
+  typedef double value_type;
+  typedef std::size_t size_type;
+  static const size_type CAPACITY = 30;
+  // CONSTRUCTOR
+  sequence();
+  // MODIFICATION MEMBER FUNCTIONS
+  void start();
+  void advance();
+  void insert(const value_type& entry);
+  void attach(const value_type& entry);
+  void remove_current();
+  // CONSTANT MEMBER FUNCTIONS
+  size_type size() const;
+  bool is_item() const;
+  value_type current() const;
+
+ private:
+  value_type data[CAPACITY];
+  size_type used;
+  size_type current_index;
+};
+}  // namespace main_savitch_3
 
 #endif
-

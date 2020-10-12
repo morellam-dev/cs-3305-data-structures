@@ -37,7 +37,8 @@ int main(int argc, char *argv[]) {
   cout << BOLD << "Computers I Use" << ARRW << '\n'
        << ASTX << "Desktop Gaming PC\t" << BOLD2 << "[x4 860k]\t(Windows 10)\n"
        << ASTX << "Macbook Pro 2015\t" << BOLD2 << "[i5-5287U]\t(macOS 10.15)\n"
-       << ASTX << "Apple iPhone 11\t"  << BOLD2 << "[A13 + 64 GB]\t(iOS 14 Beta)\n"
+       << ASTX << "Apple iPhone 11\t" << BOLD2
+       << "[A13 + 64 GB]\t(iOS 14 Beta)\n"
        << '\n';
   cout << BOLD << "Hobbies" << ARRW << '\n'
        << ASTX << "Music\n"

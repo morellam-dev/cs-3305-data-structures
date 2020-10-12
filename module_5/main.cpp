@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-#include "node1.h"
 #include "check_lists.h"
+#include "node1.h"
 
 using namespace main_savitch_5;
 

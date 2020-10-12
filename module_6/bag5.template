@@ -147,7 +147,7 @@ void bag<Item>::print_value_range(const Item& x, const Item& y) {
     if (!found_x && *it == x) {
       found_x = true;
     } else if (*it == y) {
-      break; // if x and y are the same, don't break on first instance of y.
+      break;  // if x and y are the same, don't break on first instance of y.
     }
     if (found_x) {
       std::cout << *it << ' ';

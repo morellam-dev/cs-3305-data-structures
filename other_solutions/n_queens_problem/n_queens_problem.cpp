@@ -4,10 +4,10 @@
 
 #define N 9
 
+#include <cassert>
 #include <cmath>
 #include <deque>
 #include <iostream>
-#include <cassert>
 
 using std::deque;
 using std::min;
@@ -17,7 +17,7 @@ struct Point {
   int x;
   int y;
 };
-ostream& operator<<(ostream &out, Point p) {
+ostream &operator<<(ostream &out, Point p) {
   out << '(' << p.x << ", " << p.y << ')';
   return out;
 }
@@ -26,8 +26,7 @@ template <class C>
 void print_for_each(C const &c) {
   bool first = true;
   for (auto const &x : c) {
-    if (!first)
-      std::cout << ", ";
+    if (!first) std::cout << ", ";
     first = false;
     std::cout << x;
   }
@@ -52,7 +51,8 @@ bool find_queen_conflict(const deque<Point> &queens, const Point &p) {
 }
 
 int main() {
-  std::cout << "Attempting to place " << N << " queens in an " << N << "x" << N << " board...\n";
+  std::cout << "Attempting to place " << N << " queens in an " << N << "x" << N
+            << " board...\n";
   deque<Point> queens;
   while (queens.size() < N) {
     Point *current = new Point{(int)queens.size(), 0};
