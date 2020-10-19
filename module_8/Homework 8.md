@@ -1,6 +1,6 @@
 # CS 3305 Data Structures
 
-## Homework Assignment 7
+## Homework Assignment 8
 
 M Morella
 
