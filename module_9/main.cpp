@@ -41,6 +41,7 @@ double tree_sum(binary_tree_node<double> *root) {
 }
 // returns the average of the values in all the nodes in the tree
 double tree_average(binary_tree_node<double> *root) {
+  return tree_sum(root) / tree_size(root);
 }
 // returns whether the tree is balanced
 // i.e. the depth of each subtree differs by at most 1, and each subtree is balanced
