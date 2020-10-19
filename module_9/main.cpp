@@ -4,19 +4,22 @@
 #include "build_tree.h"
 using namespace std;
 
+// Returns the maximum of the depths of the left and right subtrees,
 template <class T>
 int depth(binary_tree_node<T> *root) {
 }
-
+// Returns the largest value in the tree
 template <class T>
 T max(binary_tree_node<T> *root) {
 }
-
+// returns the sum of the values in all the nodes in the tree
 double tree_sum(binary_tree_node<double> *root) {
 }
-
+// returns the average of the values in all the nodes in the tree
 double tree_average(binary_tree_node<double> *root) {
 }
+// returns whether the tree is balanced
+// i.e. the depth of each subtree differs by at most 1, and each subtree is balanced
 template <class T>
 bool tree_is_balanced(binary_tree_node<T> *root) {
 }
