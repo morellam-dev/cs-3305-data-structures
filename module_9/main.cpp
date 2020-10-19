@@ -32,6 +32,12 @@ T max(binary_tree_node<T> *root) {
 }
 // returns the sum of the values in all the nodes in the tree
 double tree_sum(binary_tree_node<double> *root) {
+  if (!root) {
+    return 0;
+  }
+  double l_sum = tree_sum(root->left());
+  double r_sum = tree_sum(root->right());
+  return root->data() + l_sum + r_sum;
 }
 // returns the average of the values in all the nodes in the tree
 double tree_average(binary_tree_node<double> *root) {
