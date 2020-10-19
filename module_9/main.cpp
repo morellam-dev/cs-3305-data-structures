@@ -1,5 +1,6 @@
 #include <cmath>     // for std::max
 #include <iostream>  // for std::cout
+#include <cassert>   // for assert
 
 #include "bintree.h"
 #include "build_tree.h"
