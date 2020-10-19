@@ -1,4 +1,5 @@
-#include <iostream>
+#include <cmath>     // for std::max
+#include <iostream>  // for std::cout
 
 #include "bintree.h"
 #include "build_tree.h"
@@ -7,6 +8,12 @@ using namespace std;
 // Returns the maximum of the depths of the left and right subtrees,
 template <class T>
 int depth(binary_tree_node<T> *root) {
+  if (!root) {
+    return -1;
+  }
+  int left_depth = depth(root->left());
+  int right_depth = depth(root->right());
+  return 1 + std::max(left_depth, right_depth);
 }
 // Returns the largest value in the tree
 template <class T>
