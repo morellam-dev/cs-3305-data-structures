@@ -18,6 +18,17 @@ int depth(binary_tree_node<T> *root) {
 // Returns the largest value in the tree
 template <class T>
 T max(binary_tree_node<T> *root) {
+  assert(root != NULL);
+  T result = root->data();
+  if (root->left()) {
+    const T left_max = max(root->left());
+    result = std::max(result, left_max);
+  }
+  if (root->right()) {
+    T right_max = max(root->right());
+    result = std::max(result, right_max);
+  }
+  return result;
 }
 // returns the sum of the values in all the nodes in the tree
 double tree_sum(binary_tree_node<double> *root) {
