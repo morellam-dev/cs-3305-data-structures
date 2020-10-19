@@ -47,6 +47,15 @@ double tree_average(binary_tree_node<double> *root) {
 // i.e. the depth of each subtree differs by at most 1, and each subtree is balanced
 template <class T>
 bool tree_is_balanced(binary_tree_node<T> *root) {
+  if (!root || root->is_leaf()) {
+    return true;
+  }
+  int left_depth = depth(root->left());
+  int right_depth = depth(root->right());
+  if (std::abs(left_depth - right_depth) > 1) {
+    return false;
+  }
+  return tree_is_balanced(root->left()) && tree_is_balanced(root->right());
 }
 
 template <class T>
