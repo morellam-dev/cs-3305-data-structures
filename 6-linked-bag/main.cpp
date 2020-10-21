@@ -1,4 +1,4 @@
-// FILE:    main_morella.cpp
+// FILE:    main.cpp
 // AUTHOR:  M Morella
 
 #include <iostream>  // provides cout
