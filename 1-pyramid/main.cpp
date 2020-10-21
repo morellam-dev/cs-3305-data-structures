@@ -1,4 +1,4 @@
-/** ex_02.cpp
+/** main.cpp
  * Max Dylan Morella
  * Homework Assignment 1-2 (Lab Assignments)
  * Exercise 2

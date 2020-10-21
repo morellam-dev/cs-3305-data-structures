@@ -1,5 +1,5 @@
 /**
- * @file    ex_01.cpp
+ * @file    main.cpp
  * @author  M Morella
  * @brief   Prints personal information about me, in stunning 4-bit color!
  *
