@@ -1,27 +1,42 @@
 {
-    "tasks": [
-        {
-            "type": "shell",
-            "label": "C/C++: g++-10 build active file",
-            "command": "/usr/local/bin/g++-10",
-            "args": [
-                "-g",
-                "${file}",
-                "-std=gnu++17",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
-    ],
-    "version": "2.0.0"
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "C/C++: clang++ build *.cpp in active dir",
+      "command": "clang++",
+      "args": [
+        "-g",
+        "*.cpp",
+        "-o",
+        "main.out"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Simple build task, for simple folk."
+    },
+    {
+      "type": "shell",
+      "label": "C/C++: Clean up build/debug files.",
+      "command": "rm",
+      "args": [
+        "-rf",
+        "**.dSYM",
+        "**.out",
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "none",
+      "detail": "Remove messy .dSYM and .out files"
+    }
+  ],
+  "version": "2.0.0"
 }
