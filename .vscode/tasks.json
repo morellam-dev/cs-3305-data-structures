@@ -6,6 +6,8 @@
       "command": "clang++",
       "args": [
         "-g",
+        "-Wall",
+        "-std=c++17",
         "*.cpp",
         "-o",
         "main.out"
