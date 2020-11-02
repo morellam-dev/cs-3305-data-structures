@@ -44,6 +44,10 @@ For example, consider the small expression tree shown above. The left subtree ev
 
 **You need download the BST project from our course website.**
 
+The given main.cpp is the example of how to use BST class.
+
+For problem 2, you should write your main.cpp to build the BST and print it.
+
 Build a binary search tree with the following words. Insert them in an order so that the tree has as
 small a depth as possible. (Consider the insertion order of the words) Print the tree:
 
