@@ -40,9 +40,9 @@ template <typename It>
 Node *build_from_list(It first, It last) {
   if (first == last) return NULL;
   // Find the first "*"
-  It it = std::find(first, last, "*");
+  It it = std::find(first, last, "+");
   // If none, find the first "*"
-  if (it == last) it = std::find(first , last, "+");
+  if (it == last) it = std::find(first , last, "*");
   // If none, this is a leaf.
   if (it == last) it = first;
   return new Node(*it, build_from_list(first, it), build_from_list(++it, last));
