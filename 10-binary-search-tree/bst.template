@@ -25,6 +25,7 @@ bool binary_search_tree<T>::insert(const T &item) {
   binary_tree_node<T> *nn = new binary_tree_node<T>(item);
   if (root == NULL) {
     root = nn;
+    return true;
   } else {
     // look for node, stop if 'falling off the end'
     binary_tree_node<T> *p = root;
