@@ -46,7 +46,11 @@ void Table<RecordType>::insert(const RecordType& entry)
   if (!already_present) {
     assert(size() < CAPACITY);
     index = hash(entry.key);
-    while (!is_vacant(index)) index = next_index(index);
+    int count = 0;
+    while (!is_vacant(index)) {
+      ++count;
+      index = next_index(index, count);
+    }
     ++used;
   }
 
@@ -102,10 +106,10 @@ inline size_t Table<RecordType>::hash(int key) const {
 }
 
 template <class RecordType>
-inline size_t Table<RecordType>::next_index(size_t index) const
+inline size_t Table<RecordType>::next_index(size_t index, int count) const
 // Library facilities used: cstdlib
 {
-  return (index + 1) % CAPACITY;
+  return (index + count + 1) % CAPACITY;
 }
 
 template <class RecordType>
@@ -119,7 +123,7 @@ void Table<RecordType>::find_index(int key, bool& found, size_t& i) const
   while ((count < CAPACITY) && (data[i].key != NEVER_USED) &&
          (data[i].key != key)) {
     ++count;
-    i = next_index(i);
+    i = next_index(i, count);
   }
   found = (data[i].key == key);
 }
