@@ -1,8 +1,8 @@
 // FILE: table1.template
-// TEMPLATE CLASS IMPLEMENTED: table (see table1.h for documentation)
-// INVARIANT for the table ADT:
-//   1. The number of records in the table is in the member variable used.
-//   2. The actual records of the table are stored in the array data, with
+// TEMPLATE CLASS IMPLEMENTED: Table (see table1.h for documentation)
+// INVARIANT for the Table ADT:
+//   1. The number of records in the Table is in the member variable used.
+//   2. The actual records of the Table are stored in the array data, with
 //      a maximum of CAPACITY entries. Each used spot in the array has a
 //      non-negative key. Any unused record in the array has a key field of
 //      NEVER_USED (if it has never been used) or PREVIOUSLY_USED (if it once
@@ -13,16 +13,16 @@
 
 namespace main_savitch_12A {
 template <class RecordType>
-const std::size_t table<RecordType>::CAPACITY;
+const std::size_t Table<RecordType>::CAPACITY;
 
 template <class RecordType>
-const int table<RecordType>::NEVER_USED;
+const int Table<RecordType>::NEVER_USED;
 
 template <class RecordType>
-const int table<RecordType>::PREVIOUSLY_USED;
+const int Table<RecordType>::PREVIOUSLY_USED;
 
 template <class RecordType>
-table<RecordType>::table() {
+Table<RecordType>::Table() {
   std::size_t i;
 
   used = 0;
@@ -31,10 +31,10 @@ table<RecordType>::table() {
 }
 
 template <class RecordType>
-void table<RecordType>::insert(const RecordType& entry)
+void Table<RecordType>::insert(const RecordType& entry)
 // Library facilities used: cassert
 {
-  bool already_present;  // True if entry.key is already in the table
+  bool already_present;  // True if entry.key is already in the Table
   std::size_t index;     // data[index] is location for the new entry
 
   assert(entry.key >= 0);
@@ -54,10 +54,10 @@ void table<RecordType>::insert(const RecordType& entry)
 }
 
 template <class RecordType>
-void table<RecordType>::remove(int key)
+void Table<RecordType>::remove(int key)
 // Library facilities used: cassert
 {
-  bool found;         // True if key occurs somewhere in the table
+  bool found;         // True if key occurs somewhere in the Table
   std::size_t index;  // Spot where data[index].key == key
 
   assert(key >= 0);
@@ -72,7 +72,7 @@ void table<RecordType>::remove(int key)
 }
 
 template <class RecordType>
-bool table<RecordType>::is_present(int key) const
+bool Table<RecordType>::is_present(int key) const
 // Library facilities used: assert.h
 {
   bool found;
@@ -85,7 +85,7 @@ bool table<RecordType>::is_present(int key) const
 }
 
 template <class RecordType>
-void table<RecordType>::find(int key, bool& found, RecordType& result) const
+void Table<RecordType>::find(int key, bool& found, RecordType& result) const
 // Library facilities used: cassert.h
 {
   std::size_t index;
@@ -97,19 +97,19 @@ void table<RecordType>::find(int key, bool& found, RecordType& result) const
 }
 
 template <class RecordType>
-inline std::size_t table<RecordType>::hash(int key) const {
+inline std::size_t Table<RecordType>::hash(int key) const {
   return (key % CAPACITY);
 }
 
 template <class RecordType>
-inline std::size_t table<RecordType>::next_index(std::size_t index) const
+inline std::size_t Table<RecordType>::next_index(std::size_t index) const
 // Library facilities used: cstdlib
 {
   return ((index + 1) % CAPACITY);
 }
 
 template <class RecordType>
-void table<RecordType>::find_index(int key, bool& found, std::size_t& i) const
+void Table<RecordType>::find_index(int key, bool& found, std::size_t& i) const
 // Library facilities used: cstdlib
 {
   std::size_t count;  // Number of entries that have been examined
@@ -125,12 +125,12 @@ void table<RecordType>::find_index(int key, bool& found, std::size_t& i) const
 }
 
 template <class RecordType>
-inline bool table<RecordType>::never_used(std::size_t index) const {
+inline bool Table<RecordType>::never_used(std::size_t index) const {
   return (data[index].key == NEVER_USED);
 }
 
 template <class RecordType>
-inline bool table<RecordType>::is_vacant(std::size_t index) const {
+inline bool Table<RecordType>::is_vacant(std::size_t index) const {
   return (data[index].key == NEVER_USED) ||
          (data[index].key == PREVIOUSLY_USED);
 }

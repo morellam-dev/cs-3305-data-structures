@@ -33,12 +33,12 @@ int get_key();
 // items have been read, echoed to the screen, and returned by the function.
 
 int main() {
-  table<test_record_type> test;  // A table that we'll perform tests on
+  Table<test_record_type> test;  // A Table that we'll perform tests on
   char choice;                   // A command character entered by the user
   bool found;                    // Value returned by find function
   test_record_type result;       // Value returned by find function
 
-  cout << "I have initialized an empty table. Each record in the table\n";
+  cout << "I have initialized an empty Table. Each record in the Table\n";
   cout << "has an integer key and a real number as data." << endl;
 
   do {
@@ -46,7 +46,7 @@ int main() {
     choice = toupper(get_user_command());
     switch (choice) {
       case 'S':
-        cout << "The table size is " << test.size() << endl;
+        cout << "The Table size is " << test.size() << endl;
         break;
       case 'I':
         test.insert(get_record());
