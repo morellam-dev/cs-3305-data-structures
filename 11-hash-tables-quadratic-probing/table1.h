@@ -74,9 +74,8 @@ class Table {
   RecordType data[CAPACITY];
   size_t used;
   // HELPER FUNCTIONS
-  size_t hash1(int key) const;
-  size_t hash2(int key) const;
-  size_t next_index(size_t index, int key) const;
+  size_t hash(int key) const;
+  size_t next_index(size_t index) const;
   void find_index(int key, bool& found, size_t& index) const;
   bool never_used(size_t index) const;
   bool is_vacant(size_t index) const;
