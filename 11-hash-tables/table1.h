@@ -75,7 +75,8 @@ class Table {
   std::size_t used;
   // HELPER FUNCTIONS
   std::size_t hash1(int key) const;
-  std::size_t next_index(std::size_t index) const;
+  std::size_t hash2(int key) const;
+  std::size_t next_index(std::size_t index, int key) const;
   void find_index(int key, bool& found, std::size_t& index) const;
   bool never_used(std::size_t index) const;
   bool is_vacant(std::size_t index) const;
