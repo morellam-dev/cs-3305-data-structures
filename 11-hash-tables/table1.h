@@ -55,7 +55,7 @@ template <class RecordType>
 class Table {
  public:
   // MEMBER CONSTANT -- See Appendix E if this fails to compile.
-  static const std::size_t CAPACITY = 811;
+  static const size_t CAPACITY = 811;
   // CONSTRUCTOR
   Table();
   // MODIFICATION MEMBER FUNCTIONS
@@ -64,7 +64,7 @@ class Table {
   // CONSTANT MEMBER FUNCTIONS
   bool is_present(int key) const;
   void find(int key, bool& found, RecordType& result) const;
-  std::size_t size() const { return used; }
+  size_t size() const { return used; }
 
  private:
   // MEMBER CONSTANTS -- These are used in the key field of special records.
@@ -72,14 +72,14 @@ class Table {
   static const int PREVIOUSLY_USED = -2;
   // MEMBER VARIABLES
   RecordType data[CAPACITY];
-  std::size_t used;
+  size_t used;
   // HELPER FUNCTIONS
-  std::size_t hash1(int key) const;
-  std::size_t hash2(int key) const;
-  std::size_t next_index(std::size_t index, int key) const;
-  void find_index(int key, bool& found, std::size_t& index) const;
-  bool never_used(std::size_t index) const;
-  bool is_vacant(std::size_t index) const;
+  size_t hash1(int key) const;
+  size_t hash2(int key) const;
+  size_t next_index(size_t index, int key) const;
+  void find_index(int key, bool& found, size_t& index) const;
+  bool never_used(size_t index) const;
+  bool is_vacant(size_t index) const;
 };
 }  // namespace main_savitch_12A
 
