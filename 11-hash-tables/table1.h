@@ -74,7 +74,7 @@ class Table {
   RecordType data[CAPACITY];
   std::size_t used;
   // HELPER FUNCTIONS
-  std::size_t hash(int key) const;
+  std::size_t hash1(int key) const;
   std::size_t next_index(std::size_t index) const;
   void find_index(int key, bool& found, std::size_t& index) const;
   bool never_used(std::size_t index) const;

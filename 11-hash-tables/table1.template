@@ -45,7 +45,7 @@ void Table<RecordType>::insert(const RecordType& entry)
   // If the key wasn't already there, then find the location for the new entry.
   if (!already_present) {
     assert(size() < CAPACITY);
-    index = hash(entry.key);
+    index = hash1(entry.key);
     while (!is_vacant(index)) index = next_index(index);
     ++used;
   }
@@ -97,7 +97,7 @@ void Table<RecordType>::find(int key, bool& found, RecordType& result) const
 }
 
 template <class RecordType>
-inline std::size_t Table<RecordType>::hash(int key) const {
+inline std::size_t Table<RecordType>::hash1(int key) const {
   return (key % CAPACITY);
 }
 
@@ -115,7 +115,7 @@ void Table<RecordType>::find_index(int key, bool& found, std::size_t& i) const
   std::size_t count;  // Number of entries that have been examined
 
   count = 0;
-  i = hash(key);
+  i = hash1(key);
   while ((count < CAPACITY) && (data[i].key != NEVER_USED) &&
          (data[i].key != key)) {
     ++count;
