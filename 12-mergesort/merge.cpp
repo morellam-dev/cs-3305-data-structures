@@ -1,5 +1,7 @@
 // FILE: merge.cpp
+// AUTHOR: Main, Savitch, Morella
 // An interactive test program for the mergesort function
+// Reimplemented to reduce re-allocation of dynamic memory.
 
 #include <cstdlib>   // Provides EXIT_SUCCESS, size_t
 #include <iostream>  // Provides cout and cin
@@ -12,14 +14,22 @@ void mergesort(int data[], size_t n);
 // that data[0] <= data[1] <= ... <= data[n-1].
 // NOTE: If there is insufficient dynamic memory, then new_handler is called.
 
-void merge(int data[], size_t n1, size_t n2);
+void merge(int data[], size_t n1, size_t n2, int temp[]);
 // Precondition: data is an array (or subarray) with at least n1+n2 elements.
 // The first n1 elements (from data[0] to data[n1-1]) are sorted from smallest
 // to largest, and the last n2 (from data[n1] to data[n1+n2-1]) are also
 // sorted from smallest to largest.
 // Postcondition: The first n1+n2 elements of data have been
 // rearranged to be sorted from smallest to largest.
-// NOTE: If there is insufficient dynamic memory, then new_handler is called.
+void mergesort(int data[], size_t first_index, size_t last_index, int temp[]);
+// Precondition: data[first_index] through data[last_index] are array
+// elements in no particular order. The temp array has locations
+// temp[first_index] through temp[last_index].
+// Postcondition: The elements data[first_index] through data[last_index]
+// have been rearranged so that they are ordered from smallest to largest.
+// The array elements temp[first_index] through temp[last_index] have been
+// used as temporary storage and now contain a copy of data[first_index]
+// through data[last_index].
 
 int main() {
   const char BLANK = ' ';
@@ -58,33 +68,27 @@ void mergesort(int data[], size_t n)
 // NOTE: If there is insufficient dynamic memory, thenbad_alloc is thrown.
 // Library facilities used: cstdlib
 {
-  size_t n1;  // Size of the first subarray
-  size_t n2;  // Size of the second subarray
+  int *temp = new int[n];           // Allocate a dynamic temp array to the heap
+  mergesort(data, 0, n - 1, temp);  // Call mergesort with parameters
+  delete[] temp;
+}
 
+void mergesort(int data[], size_t first, size_t last, int temp[]) {
+  size_t n = last - first + 1; // Size of the subarray from data[first] to [last]
   if (n > 1) {
-    // Compute sizes of the subarrays.
-    n1 = n / 2;
-    n2 = n - n1;
+    size_t n1 = (n / 2);  // Size of 1st subarray
+    size_t n2 = n - n1;   // Size of 2nd subarray
 
-    mergesort(data, n1);         // Sort from data[0] through data[n1-1]
-    mergesort((data + n1), n2);  // Sort from data[n1] to the end
+    // Sort the two subarrays
+    mergesort(data, first, first + n1 - 1, temp);
+    mergesort(data, first + n1, last, temp);
 
     // Merge the two sorted halves.
-    merge(data, n1, n2);
+    merge((data + first), n1, n2, (temp + first));
   }
 }
 
-void merge(int data[], size_t n1, size_t n2)
-// Precondition: data is an array (or subarray) with at least n1 + n2 elements.
-// The first n1 elements (from data[0] to data[n1 - 1]) are sorted from
-// smallest to largest, and the last n2 (from data[n1] to data[n1 + n2 - 1])
-// also are sorted from smallest to largest.
-// Postcondition: The first n1 + n2 elements of data have been rearranged to be
-// sorted from smallest to largest.
-// NOTE: If there is insufficient dynamic memory, then bad_alloc is thrown.
-// Library facilities used: cstdlib
-{
-  int *temp;           // Points to dynamic array to hold the sorted elements
+void merge(int data[], size_t n1, size_t n2, int temp[]) {
   size_t copied = 0;   // Number of elements copied from data to temp
   size_t copied1 = 0;  // Number copied from the first half of data
   size_t copied2 = 0;  // Number copied from the second half of data
@@ -107,5 +111,4 @@ void merge(int data[], size_t n1, size_t n2)
 
   // Copy from temp back to the data array, and release temp's memory.
   for (i = 0; i < n1 + n2; i++) data[i] = temp[i];
-  delete[] temp;
 }
