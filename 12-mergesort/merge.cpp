@@ -21,7 +21,7 @@ void mergesort(int data[], size_t first_index, size_t last_index, int temp[]);
 
 int main() {
   const char BLANK = ' ';
-  const size_t ARRAY_SIZE = 10;  // Number of elements in the array to be sorted
+  const size_t ARRAY_SIZE = 30;  // Number of elements in the array to be sorted
   int data[ARRAY_SIZE];          // Array of integers to be sorted
   int user_input;                // Number typed by the user
   size_t number_of_elements;     // How much of the array is used
@@ -50,30 +50,26 @@ int main() {
 }
 
 // Precondition: The elements data[first] thru data[second-1], and the elements
-// data[second] thru data[last] are sorted. Postcondition: The array elements
-// data[first] thru data[last] are sorted. Temp[first] through temp[last] have
-// been used as temporary storage and now contain a copy of data[first] through
-// data[last].
+// data[second] thru data[last] are sorted.
+// Postcondition: The array elements data[first] thru data[last] are sorted.
+// temp[first] through temp[last] have been used as temporary storage and now
+// contain a copy of data[first] through data[last].
 void merge(int data[], size_t first, size_t second, size_t last, int temp[]) {
-  size_t i1 = first;      // Index into first subarray
-  size_t i2 = second;        // Index into second subarray
+  size_t t = first;    // Index into temp array.
+  size_t i1 = first;   // Index into first subarray
+  size_t i2 = second;  // Index into second subarray
 
-  for (size_t t = first; t <= last; t++) {
-    if ((i1 < second) && (i2 < last + 1)) {
-      // Merge elements, copying from two halves of data to the temporary array.
-      if ((data)[i1] < (data)[i2]) {
-        temp[t] = data[i1++];        // Copy from first half
-      } else {
-        temp[t] = (data)[i2++];     // Copy from second half
-      }
-    }
-    // Copy any remaining entries in the left and right subarrays.
-    else if (i1 < second) {
-      temp[t] = data[i1++];
-    } else if (i2 < last + 1) {
-      temp[t] = data[i2++];
+  // Merge the two subarrays
+  while ((i1 < second) && (i2 <= last)) {
+    if (data[i1] < data[i2]) {
+      temp[t++] = data[i1++];  // Copy from first half
+    } else {
+      temp[t++] = data[i2++];  // Copy from second half
     }
   }
+  // Add remaining elements from subarrays.
+  while (i1 < second) temp[t++] = data[i1++];
+  while (i2 <= last) temp[t++] = data[i2++];
   // Copy from temp back to the data array
   for (size_t i = first; i <= last; ++i) {
     data[i] = temp[i];
@@ -82,7 +78,8 @@ void merge(int data[], size_t first, size_t second, size_t last, int temp[]) {
 
 void mergesort(int data[], size_t first, size_t last, int temp[]) {
   if (first < last) {
-    size_t mid = first + (last + 1 - first) / 2;  // first index in second subarray.
+    size_t mid;  // The first index of the second subarray.
+    mid = first + (last + 1 - first) / 2;
     // Sort from data[first] through data[mid - 1]
     mergesort(data, first, mid - 1, temp);
     // Sort from data[mid] to data[last].
