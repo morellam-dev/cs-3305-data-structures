@@ -57,26 +57,25 @@ int main() {
 // NOTE: If there is insufficient dynamic memory, then bad_alloc is thrown.
 // Library facilities used: cstdlib
 void merge(int data[], size_t n1, size_t n2) {
-  size_t copied = 0;   // Number of elements copied from data to temp
-  size_t copied1 = 0;  // Number of elements copied from first half of data
-  size_t copied2 = 0;  // Number of elemnets copied from second half of data
+  int *temp = new int[n1 + n2]; // Dynamic array which stores sorted elements
+  size_t data_i = 0;   // Number of elements copied from data to temp
+  size_t i1 = 0;  // Index into first subarray
+  size_t i2 = 0;  // Index into second subarray
 
-  // Allocate a dynamic array which stores the sorted elements.
-  int *temp = new int[n1 + n2];
   // Merge elements, copying from two halves of data to the temporary array.
-  while ((copied1 < n1) && (copied2 < n2)) {
-    if (data[copied1] < (data + n1)[copied2]) {
-      temp[copied++] = data[copied1++];  // Copy from first half
+  while ((i1 < n1) && (i2 < n2)) {
+    if (data[i1] < (data + n1)[i2]) {
+      temp[data_i++] = data[i1++];  // Copy from first half
     } else {
-      temp[copied++] = (data + n1)[copied2++];  // Copy from second half
+      temp[data_i++] = (data + n1)[i2++];  // Copy from second half
     }
   }
   // Copy any remaining entries in the left and right subarrays.
-  while (copied1 < n1) {
-    temp[copied++] = data[copied1++];
+  while (i1 < n1) {
+    temp[data_i++] = data[i1++];
   }
-  while (copied2 < n2) {
-    temp[copied++] = (data + n1)[copied2++];
+  while (i2 < n2) {
+    temp[data_i++] = (data + n1)[i2++];
   }
   // Copy from temp back to the data array, and release temp’s memory.
   for (size_t i = 0; i < n1 + n2; ++i) {
