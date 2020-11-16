@@ -1,4 +1,4 @@
-// FILE: merge.cpp
+// FILE: merge2.cpp
 // AUTHOR: Main, Savitch, Morella
 // An interactive test program for the mergesort function
 // Reimplemented to reduce re-allocation of dynamic memory.
