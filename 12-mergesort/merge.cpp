@@ -7,17 +7,10 @@
 #include <iostream>   // Provides cout and cin
 using namespace std;
 
-// PROTOTYPE of mergesort, defined on page 681 of the Main-Savitch book
-void mergesort(int data[], size_t first_index, size_t last_index, int temp[]);
-// Precondition: data[first_index] through data[last_index] are array
-// elements in no particular order. The temp array has locations
-// temp[first_index] through temp[last_index].
-
-// Postcondition: The elements data[first_index] through data[last_index]
-// have been rearranged so that they are ordered from smallest to largest.
-// The array elements temp[first_index] through temp[last_index] have been
-// used as temporary storage and now contain a copy of data[first_index]
-// through data[last_index].
+// PROTOTYPE of mergesort function used in the main method.
+// Precondition: data is an array with at least n elements.
+// Postcondition: data[0] thru data[n-1] are sorted.
+void mergesort(int data[], size_t n);
 
 int main() {
   const char BLANK = ' ';
@@ -40,8 +33,7 @@ int main() {
     cin >> user_input;
   }
 
-  int temp[number_of_elements];
-  mergesort(data, 0, number_of_elements - 1, temp);
+  mergesort(data, number_of_elements);
   cout << "In sorted order, your numbers are: " << endl;
   for (i = 0; i < number_of_elements; i++) cout << data[i] << BLANK << BLANK;
   cout << endl;
@@ -49,11 +41,43 @@ int main() {
   return EXIT_SUCCESS;
 }
 
-// Precondition: The elements data[first] thru data[second-1], and the elements
-// data[second] thru data[last] are sorted.
-// Postcondition: The array elements data[first] thru data[last] are sorted.
-// temp[first] through temp[last] have been used as temporary storage and now
-// contain a copy of data[first] through data[last].
+// PROTOTYPES of helper functions used by mergesort.
+
+void mergesort(int data[], size_t first, size_t last, int temp[]);
+void merge(int data[], size_t first, size_t second, size_t last, int temp[]);
+
+// IMPLEMENTATION of mergesort function
+
+void mergesort(int data[], size_t n) {
+  int *temp = new int[n];           // Allocate a dynamic temp array to the heap
+  mergesort(data, 0, n - 1, temp);  // Call mergesort with parameters
+  delete[] temp;
+}
+// Precondition: data[first_index] through data[last_index] are array
+// elements in no particular order. The temp array has locations
+// temp[first_index] through temp[last_index].
+// Postcondition: The elements data[first_index] through data[last_index]
+// have been rearranged so that they are ordered from smallest to largest.
+// The array elements temp[first_index] through temp[last_index] have been
+// used as temporary storage and now contain a copy of data[first_index]
+// through data[last_index].
+void mergesort(int data[], size_t first, size_t last, int temp[]) {
+  if (first < last) {
+    size_t mid;  // The first index of the second subarray.
+    mid = first + (last + 1 - first) / 2;
+    // Sort from data[first] through data[mid - 1]
+    mergesort(data, first, mid - 1, temp);
+    // Sort from data[mid] to data[last].
+    mergesort(data, mid, last, temp);
+    // Merge the sorted arrays.
+    merge(data, first, mid, last, temp);
+  }
+}
+// Precondition: The subarrays from data[first] to data[second-1], and from
+// data[second] to data[last] are sorted.
+// Postcondition: The subarray data[first] thru data[last] is now sorted.
+// NOTE: temp[first] through temp[last] have been used as temporary storage and
+// now contain a copy of data[first] through data[last].
 void merge(int data[], size_t first, size_t second, size_t last, int temp[]) {
   size_t t = first;    // Index into temp array.
   size_t i1 = first;   // Index into first subarray
@@ -73,18 +97,5 @@ void merge(int data[], size_t first, size_t second, size_t last, int temp[]) {
   // Copy from temp back to the data array
   for (size_t i = first; i <= last; ++i) {
     data[i] = temp[i];
-  }
-}
-
-void mergesort(int data[], size_t first, size_t last, int temp[]) {
-  if (first < last) {
-    size_t mid;  // The first index of the second subarray.
-    mid = first + (last + 1 - first) / 2;
-    // Sort from data[first] through data[mid - 1]
-    mergesort(data, first, mid - 1, temp);
-    // Sort from data[mid] to data[last].
-    mergesort(data, mid, last, temp);
-    // Merge the sorted arrays.
-    merge(data, first, mid, last, temp);
   }
 }
