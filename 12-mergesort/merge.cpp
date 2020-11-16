@@ -49,17 +49,17 @@ int main() {
   return EXIT_SUCCESS;
 }
 
-// Precondition: The elements data[first] thru data[mid-1], and the elements
-// data[mid] thru data[last] are sorted. Postcondition: The array elements
+// Precondition: The elements data[first] thru data[second-1], and the elements
+// data[second] thru data[last] are sorted. Postcondition: The array elements
 // data[first] thru data[last] are sorted. Temp[first] through temp[last] have
 // been used as temporary storage and now contain a copy of data[first] through
 // data[last].
-void merge(int data[], size_t first, size_t mid, size_t last, int temp[]) {
+void merge(int data[], size_t first, size_t second, size_t last, int temp[]) {
   size_t i1 = first;      // Index into first subarray
-  size_t i2 = mid;        // Index into second subarray
+  size_t i2 = second;        // Index into second subarray
 
   for (size_t t = first; t <= last; t++) {
-    if ((i1 < mid) && (i2 < last + 1)) {
+    if ((i1 < second) && (i2 < last + 1)) {
       // Merge elements, copying from two halves of data to the temporary array.
       if ((data)[i1] < (data)[i2]) {
         temp[t] = data[i1++];        // Copy from first half
@@ -68,7 +68,7 @@ void merge(int data[], size_t first, size_t mid, size_t last, int temp[]) {
       }
     }
     // Copy any remaining entries in the left and right subarrays.
-    else if (i1 < mid) {
+    else if (i1 < second) {
       temp[t] = data[i1++];
     } else if (i2 < last + 1) {
       temp[t] = data[i2++];
