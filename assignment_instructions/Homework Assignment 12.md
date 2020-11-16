@@ -39,20 +39,17 @@ mergesort according to the following specification:
 
    The basis of the technique is to get the items to move in big steps (rather than shifting elements to the next-higher index). These big-step shifts are done early in the algorithm, and they tend to put the array in nearly sorted order. Later in the algorithm, we use smaller steps (all the way down to steps of size one, just like an ordinary insertionsort). But by the time that the small steps are being taken, the array is nearly sorted, and that’s a situation where insertionsort is efficient.
 
-   The choice of the various step sizes affects the performance of the algorithm, but one sequence that is empirically good starts at n/2, and each subse- quent step size is about the previous size divided by 2.2.
+   The choice of the various step sizes affects the performance of the algorithm, but one sequence that is empirically good starts at n/2, and each subsequent step size is about the previous size divided by 2.2.
 
    The overall pseudocode is given here:
 
-   ```cpp
-   ss = n/2;
-   while (ss > 0) {
-   // Do an insertionsort on the elements data[0], data[ss], data[2*ss]...
-   // Also do an insertionsort on data[1], data[ss+1], data[2*ss+1]...
-   // And on data[2], data[ss+2], data[2*ss+2]...
-   // And so on. The last little insertionsort that you do starts at data[ss-1].
-   // ss = round ss/2.2 to nearest integer;
-   }
-   ```
+   1. LET ss = N/2;
+   2. WHILE (ss > 0):
+      a. Do an insertionsort on the elements `data[0]`, `data[ss]`, `data[2*ss]`...
+      b. Also do an insertionsort on `data[1]`, `data[ss+1]`, `data[2*ss+1]`...
+      c. And on `data[2]`, `data[ss+2]`, `data[2*ss+2]`...
+      d. And so on. The last little insertionsort that you do starts at data[ss-1].
+      e. SET `ss = ss/2.2`, rounded to nearest integer;
 
 ## Submitting Assignment
 
