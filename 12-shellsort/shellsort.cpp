@@ -10,9 +10,10 @@
 using namespace std;
 
 // PROTOTYPE: shellsort function
-void shellsort(int data[], size_t size);
-// Precondition: 'data' is an array with 'size' elements.
-// Postcondition: 'data' is sorted in ascending order.
+
+void shellsort(int data[], size_t n);
+// Precondition: data is an array with at least n elements.
+// Postcondition: the elements data[0] thru data[n - 1] are sorted in ascending order.
 
 int main() {
   const char BLANK = ' ';
@@ -47,11 +48,15 @@ int main() {
 // An optimization of insertionsort, that exchanges elements which are far
 // apart.
 
-void shellsort(int data[], size_t size) {
-  int ss = size / 2;
+void shellsort(int data[], size_t n)
+// Precondition: data is an array with at least n elements.
+// Postcondition: the elements data[0] thru data[n - 1] are sorted in ascending
+// order.
+{
+  int ss = n / 2;
   while (ss > 0) {
     for (int offset = 0; offset < ss; offset++) {
-      for (int i = ss + offset; i < size; i += ss) {
+      for (int i = ss + offset; i < n; i += ss) {
         int temp = data[i];
         int j = i - ss;
         while (j >= 0 && data[j] > temp) {
