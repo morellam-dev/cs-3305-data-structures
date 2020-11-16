@@ -1,30 +1,39 @@
-// FILE:    merge.cpp
-// AUTHOR:  M Morella
+// FILE: merge.cpp
 // An interactive test program for the mergesort function
 
-#include <algorithm>  // Provides swap
-#include <cstdlib>    // Provides EXIT_SUCCESS, size_t
-#include <iostream>   // Provides cout and cin
+#include <cstdlib>   // Provides EXIT_SUCCESS, size_t
+#include <iostream>  // Provides cout and cin
 using namespace std;
 
-// PROTOTYPE of mergesort function used in the main method.
-// Precondition: data is an array with at least n elements.
-// Postcondition: data[0] thru data[n-1] are sorted.
+// PROTOTYPES of the functions used in this test program:
 void mergesort(int data[], size_t n);
+// Precondition: data is an array with at least n components.
+// Postcondition: The elements of data have been rearranged so
+// that data[0] <= data[1] <= ... <= data[n-1].
+// NOTE: If there is insufficient dynamic memory, then new_handler is called.
+
+void merge(int data[], size_t n1, size_t n2);
+// Precondition: data is an array (or subarray) with at least n1+n2 elements.
+// The first n1 elements (from data[0] to data[n1-1]) are sorted from smallest
+// to largest, and the last n2 (from data[n1] to data[n1+n2-1]) are also
+// sorted from smallest to largest.
+// Postcondition: The first n1+n2 elements of data have been
+// rearranged to be sorted from smallest to largest.
+// NOTE: If there is insufficient dynamic memory, then new_handler is called.
 
 int main() {
   const char BLANK = ' ';
-  const size_t ARRAY_SIZE = 30;  // Number of elements in the array to be sorted
+  const size_t ARRAY_SIZE = 10;  // Number of elements in the array to be sorted
   int data[ARRAY_SIZE];          // Array of integers to be sorted
   int user_input;                // Number typed by the user
   size_t number_of_elements;     // How much of the array is used
   size_t i;                      // Array index
 
-  // Provide some instructions.
-  cout << "Please type up to " << ARRAY_SIZE << " positive integers. ";
+  // Provide some instructions
+  cout << "Please type up to " << ARRAY_SIZE << " positive integers.";
   cout << "Indicate the list's end with a zero." << endl;
 
-  // Read the input numbers.
+  // Read the input numbers
   number_of_elements = 0;
   cin >> user_input;
   while ((user_input != 0) && (number_of_elements < ARRAY_SIZE)) {
@@ -33,6 +42,7 @@ int main() {
     cin >> user_input;
   }
 
+  // Sort the numbers and print the result with two blanks after each number
   mergesort(data, number_of_elements);
   cout << "In sorted order, your numbers are: " << endl;
   for (i = 0; i < number_of_elements; i++) cout << data[i] << BLANK << BLANK;
@@ -41,61 +51,61 @@ int main() {
   return EXIT_SUCCESS;
 }
 
-// PROTOTYPES of helper functions used by mergesort.
+void mergesort(int data[], size_t n)
+// Precondition: data is an array with at least n components.
+// Postcondition: The elements of data have been rearranged so
+// that data[0] <= data[1] <= ... <= data[n-1].
+// NOTE: If there is insufficient dynamic memory, thenbad_alloc is thrown.
+// Library facilities used: cstdlib
+{
+  size_t n1;  // Size of the first subarray
+  size_t n2;  // Size of the second subarray
 
-void mergesort(int data[], size_t first, size_t last, int temp[]);
-void merge(int data[], size_t first, size_t second, size_t last, int temp[]);
+  if (n > 1) {
+    // Compute sizes of the subarrays.
+    n1 = n / 2;
+    n2 = n - n1;
 
-// IMPLEMENTATION of mergesort function
+    mergesort(data, n1);         // Sort from data[0] through data[n1-1]
+    mergesort((data + n1), n2);  // Sort from data[n1] to the end
 
-void mergesort(int data[], size_t n) {
-  int *temp = new int[n];           // Allocate a dynamic temp array to the heap
-  mergesort(data, 0, n - 1, temp);  // Call mergesort with parameters
+    // Merge the two sorted halves.
+    merge(data, n1, n2);
+  }
+}
+
+void merge(int data[], size_t n1, size_t n2)
+// Precondition: data is an array (or subarray) with at least n1 + n2 elements.
+// The first n1 elements (from data[0] to data[n1 - 1]) are sorted from
+// smallest to largest, and the last n2 (from data[n1] to data[n1 + n2 - 1])
+// also are sorted from smallest to largest.
+// Postcondition: The first n1 + n2 elements of data have been rearranged to be
+// sorted from smallest to largest.
+// NOTE: If there is insufficient dynamic memory, then bad_alloc is thrown.
+// Library facilities used: cstdlib
+{
+  int *temp;           // Points to dynamic array to hold the sorted elements
+  size_t copied = 0;   // Number of elements copied from data to temp
+  size_t copied1 = 0;  // Number copied from the first half of data
+  size_t copied2 = 0;  // Number copied from the second half of data
+  size_t i;            // Array index to copy from temp back into data
+
+  // Allocate memory for the temporary dynamic array.
+  temp = new int[n1 + n2];
+
+  // Merge elements, copying from two halves of data to the temporary array.
+  while ((copied1 < n1) && (copied2 < n2)) {
+    if (data[copied1] < (data + n1)[copied2])
+      temp[copied++] = data[copied1++];  // Copy from first half
+    else
+      temp[copied++] = (data + n1)[copied2++];  // Copy from second half
+  }
+
+  // Copy any remaining entries in the left and right subarrays.
+  while (copied1 < n1) temp[copied++] = data[copied1++];
+  while (copied2 < n2) temp[copied++] = (data + n1)[copied2++];
+
+  // Copy from temp back to the data array, and release temp's memory.
+  for (i = 0; i < n1 + n2; i++) data[i] = temp[i];
   delete[] temp;
-}
-// Precondition: data[first_index] through data[last_index] are array
-// elements in no particular order. The temp array has locations
-// temp[first_index] through temp[last_index].
-// Postcondition: The elements data[first_index] through data[last_index]
-// have been rearranged so that they are ordered from smallest to largest.
-// The array elements temp[first_index] through temp[last_index] have been
-// used as temporary storage and now contain a copy of data[first_index]
-// through data[last_index].
-void mergesort(int data[], size_t first, size_t last, int temp[]) {
-  if (first < last) {
-    size_t mid;  // The first index of the second subarray.
-    mid = first + (last + 1 - first) / 2;
-    // Sort from data[first] through data[mid - 1]
-    mergesort(data, first, mid - 1, temp);
-    // Sort from data[mid] to data[last].
-    mergesort(data, mid, last, temp);
-    // Merge the sorted arrays.
-    merge(data, first, mid, last, temp);
-  }
-}
-// Precondition: The subarrays from data[first] to data[second-1], and from
-// data[second] to data[last] are sorted.
-// Postcondition: The subarray data[first] thru data[last] is now sorted.
-// NOTE: temp[first] through temp[last] have been used as temporary storage and
-// now contain a copy of data[first] through data[last].
-void merge(int data[], size_t first, size_t second, size_t last, int temp[]) {
-  size_t t = first;    // Index into temp array.
-  size_t i1 = first;   // Index into first subarray
-  size_t i2 = second;  // Index into second subarray
-
-  // Merge the two subarrays
-  while ((i1 < second) && (i2 <= last)) {
-    if (data[i1] < data[i2]) {
-      temp[t++] = data[i1++];  // Copy from first half
-    } else {
-      temp[t++] = data[i2++];  // Copy from second half
-    }
-  }
-  // Add remaining elements from subarrays.
-  while (i1 < second) temp[t++] = data[i1++];
-  while (i2 <= last) temp[t++] = data[i2++];
-  // Copy from temp back to the data array
-  for (size_t i = first; i <= last; ++i) {
-    data[i] = temp[i];
-  }
 }
